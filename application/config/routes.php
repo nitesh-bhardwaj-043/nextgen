@@ -20,7 +20,12 @@ $route["dashboard"]="services/dashboard";
 $route["editinfo"]="services/editinfo";
 $route["changepassword"]="services/changepassword";
 $route["bank"]="services/bank";
-
+$route["login"]="services/login";
+$route["register"]="services/register";
+$route["forgot-password"]="services/forgotpass";
+$route["terms-and-conditions"]="services/tc";
+$route["refer"]="services/refer";
+$route["help"]="services/help";
 
 
 $route["office-relocation"]="services/office";

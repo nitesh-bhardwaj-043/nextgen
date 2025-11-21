@@ -26,4 +26,5 @@ class Home extends MX_Controller
         //     redirect("bihar", 'location', 301);
         // }
     }
+    
 }

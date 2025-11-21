@@ -1,3 +1,8 @@
+<?php
+// Get current URI segment
+$current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
+?>
+
 <div class="mil-top-panel">
     <div class="container">
         <a href="<?= site_url() ?>index.html" class="mil-logo">
@@ -5,27 +10,24 @@
         </a>
         <nav class="mil-top-menu">
             <ul>
-                <li class=" mil-active">
+                <li class="<?= ($current_segment == '' || $current_segment == 'home') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url() ?>#.">Home</a>
                 </li>
-                <li>
+                <li class="<?= ($current_segment == 'deposit') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("deposit") ?>">Deposit</a>
                 </li>
-                <li>
+                <li class="<?= ($current_segment == 'withdraw') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("withdraw") ?>">Withdrawal</a>
-
                 </li>
-                <li>
+                <li class="<?= ($current_segment == 'setting') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("setting") ?>">Setting</a>
-
                 </li>
-                <li>
+                <li class="<?= ($current_segment == 'help') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("help") ?>">Help</a>
                 </li>
-
-
             </ul>
         </nav>
+
         <style>
             .auth-wrapper {
                 display: flex;
@@ -35,7 +37,6 @@
                 padding: 8px 16px;
                 border-radius: 6px;
             }
-
             .auth-wrapper a {
                 color: #fff;
                 text-decoration: none;
@@ -44,14 +45,11 @@
         </style>
 
         <div class="auth-wrapper">
-            <a href="<?= site_url() ?>login.html">Login</a>
+            <a href="<?= site_url("login") ?>">Login</a>
             <span style="color:#fff;">/</span>
-            <a href="<?= site_url() ?>register.html">Sign Up</a>
+            <a href="<?= site_url("register") ?>">Sign Up</a>
         </div>
 
+        <div class="mil-menu-btn"><span></span></div>
     </div>
-
-</div>
-</div>
-</div>
 </div>

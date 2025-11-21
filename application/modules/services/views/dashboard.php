@@ -14,14 +14,20 @@ function mask_phone_last4($phone)
 {
     $digits = preg_replace('/\D/', '', $phone);
     $len = strlen($digits);
-    if ($len <= 4) return str_repeat('X', $len);
+    if ($len <= 4)
+        return str_repeat('X', $len);
     return str_repeat('X', $len - 4) . substr($digits, -4);
 }
 ?>
 
-
+<div id="smooth-wrapper" class="mil-wrapper">
+    <div class="mil-progress-track">
+        <div class="mil-progress"></div>
+    </div>
+    <div class="progress-wrap active-progress"></div>
+    <div id="smooth-content">
     <div class="container" style="margin-top: 100px;">
-        <div class="top-bar" >
+        <div class="top-bar">
             <div>
                 <h2 style="margin:0">Welcome, <span class="username"><?= htmlspecialchars($user['name']) ?></span></h2>
                 <div class="muted">Here's your account summary</div>
@@ -124,7 +130,8 @@ function mask_phone_last4($phone)
 
         </div>
     </div>
-
+</div>
+</div>
     <!-- STREAMING SCRIPT (unchanged) -->
     <script>
         const TD_API_KEY = 'YOUR_TWELVEDATA_API_KEY';
@@ -361,7 +368,8 @@ function mask_phone_last4($phone)
             .grid {
                 grid-template-columns: 1fr;
             }
-            .top-bar{
+
+            .top-bar {
                 display: flex;
                 flex-direction: column;
             }

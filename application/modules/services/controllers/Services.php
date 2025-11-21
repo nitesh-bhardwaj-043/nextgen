@@ -111,4 +111,53 @@ function changepassword()
     $data['view_file'] = "changepassword";
     echo Modules::run('template/layout2', $data);
 }
+function login()
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "login";
+    echo Modules::run('template/layout2', $data);
+}
+function register()
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "register";
+    echo Modules::run('template/layout2', $data);
+}
+function forgotpass(): void
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "forgotpass";
+    echo Modules::run('template/layout2', $data);
+}
+// Terms and Conditions
+function tc(): void
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "tc";
+    echo Modules::run('template/layout2', $data);
+}
+function refer(): void
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "refer";
+    echo Modules::run('template/layout2', $data);
+}
+function help(): void
+{
+    $data['title'] = "";
+    $data['description'] = "";
+    $data['module'] = "services";
+    $data['view_file'] = "help";
+    echo Modules::run('template/layout2', $data);
+}
 }

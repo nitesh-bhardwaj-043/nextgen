@@ -1,9 +1,10 @@
-<!-- Deposit Page -->
 <div id="smooth-wrapper" class="mil-wrapper">
-
+    <div class="mil-progress-track">
+        <div class="mil-progress"></div>
+    </div>
+    <div class="progress-wrap active-progress"></div>
     <div id="smooth-content">
-
-        <div class="mil-banner mil-dissolve">
+        <div class="mil-banner mil-dissolve" >
             <div class="container">
                 <div class="row justify-content-center">
 
@@ -59,6 +60,7 @@
         </div>
 
     </div>
+</div>
 </div>
 <script>
     function nextStep() {
