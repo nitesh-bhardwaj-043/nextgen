@@ -1,7 +1,7 @@
 <div class="heading">
 	<ol class="breadcrumb">
 		<li><a href="#/">Dashboard</a></li>
-		<li><a href="javascript:void(0)">Qr</a></li>
+		<li><a href="javascript:void(0)">QR</a></li>
 	</ol>
 </div>
 <div class="col-sm-12 well">
@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-xs-5 col-md-3 text-right">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#qrModal">
-					Add qr
+					Add QR
 				</button>
 			</div>
 		</div>
@@ -28,26 +28,17 @@
 				<thead>
 					<tr class="active">
 						<th>Sl No.</th>
-						<th>Customer Name</th>
-						<th>Firm Name</th>
-						<th>City</th>
-						<th>Product</th>
-						<th>Qty</th>
-						<th>Complaint Number</th>
-						<th>Date</th>
+						<th>Name</th>
+						<th>Image</th>
+						<th>Status</th>
 						<th style="width:85px">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr dir-paginate="y in datadb | filter: search_text | itemsPerPage: 10">
 						<td>{{$index+1}}</td>
-						<td>{{y.c_name}}</td>
-						<td>{{y.f_name}}</td>
-						<td>{{y.city}}</td>
-						<td>{{y.product}}</td>
-						<td>{{y.qty}}</td>
-						<td>{{y.c_no}}</td>
-						<td>{{y.c_date}}</td>
+						<td>{{y.name}}</td>
+						<td><img src="<?= base_url('assets/uploads/qr/') ?>{{y.image}}" height="50px" /></td>
 						<td>
 							<div style="height:25px;width:25px;border-radius:50%;background:red" ng-if="y.status == '0'">
 							</div>
@@ -60,7 +51,7 @@
 								<span class="fa fa-pencil fa-2x"></span>
 							</a>
 							&nbsp;&nbsp;
-							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.c_id)">
+							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.qr_id)">
 								<span class="fa fa-trash fa-2x"></span>
 							</a>
 						</td>
@@ -83,7 +74,7 @@
 				<button type="button" class="close" ng-click="close_modal()">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="qrModalLabel">Add qr</h4>
+				<h4 class="modal-title" id="qrModalLabel">Add QR</h4>
 			</div>
 
 			<div class="modal-body" style="max-height:70vh; overflow-y:auto;">

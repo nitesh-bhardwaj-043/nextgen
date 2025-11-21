@@ -36,30 +36,25 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     // Newly added states 
     
-    // .state("complaints", {
-    //   url: "/complaints",
-    //   templateUrl: "complaints",
-    //   controller: "ctrl_complaints",
-    // })
-    // .state("fcomplaints", {
-    //   url: "/fcomplaints",
-    //   templateUrl: "fcomplaints",
-    //   controller: "ctrl_fcomplaints",
-    // })
-    // .state("ccomplaints", {
-    //   url: "/ccomplaints",
-    //   templateUrl: "ccomplaints",
-    //   controller: "ctrl_ccomplaints",
-    // })
-    // .state("dealership", {
-    //   url: "/dealership",
-    //   templateUrl: "dealership",
-    //   controller: "ctrl_dealership",
-    // })
-    // .state("expenses", {
-    //   url: "/expenses",
-    //   templateUrl: "expenses",
-    //   controller: "ctrl_expenses",
-    // })
+    .state("qr", {
+      url: "/qr",
+      templateUrl: "qr",
+      controller: "ctrl_qr",
+    })
+    .state("request", {
+      url: "/request",
+      templateUrl: "request",
+      controller: "ctrl_request",
+    })
+    .state("transactions", {
+      url: "/transactions",
+      templateUrl: "transactions",
+      controller: "ctrl_transactions",
+    })
+    .state("users", {
+      url: "/users",
+      templateUrl: "users",
+      controller: "ctrl_users",
+    })
     ;
 });

@@ -32,11 +32,10 @@ class App extends MX_Controller
             $this->load->view('login/ctrl_login.js');
             $this->load->view('dashboard/ctrl_dashboard.js');
 
-            // $this->load->view('expenses/ctrl_expenses.js');
-            // $this->load->view('complaints/ctrl_complaints.js');
-            // $this->load->view('fcomplaints/ctrl_fcomplaints.js');
-            // $this->load->view('ccomplaints/ctrl_ccomplaints.js');
-            // $this->load->view('dealership/ctrl_dealership.js');
+            $this->load->view('qr/ctrl_qr.js');
+            $this->load->view('request/ctrl_request.js');
+            $this->load->view('transactions/ctrl_transactions.js');
+            $this->load->view('users/ctrl_users.js');
         }
         else redirect('login');
     }

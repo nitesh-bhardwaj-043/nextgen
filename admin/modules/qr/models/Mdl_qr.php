@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Mdl_qr extends CI_Model
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+class Mdl_workers extends CI_Model
 {
     private $table;
     function __construct()
@@ -7,31 +7,32 @@ class Mdl_qr extends CI_Model
         parent::__construct();
         $this->table = "qr";
     }
-    function view_data($where=null,$select="*")
+    function view_data()
     {
-        $this->db->select($select);
-        if($where) 
-            $this->db->where($where);
-        $this->db->where('status',1);
-        $this->db->order_by('trans_id',"desc");
-        return $this->db->get( $this->table);
+        $this->db->select("*");
+        $this->db->order_by('qr_id', "desc");
+        return $this->db->get($this->table);
     }
     function add_data($data)
     {
-        $a=$this->db->insert($this->table,$data);
+        $a = $this->db->insert($this->table, $data);
         return $this->db->affected_rows($a);
     }
-    function update_data($where,$data)
+    function update_data($where, $data)
     {
         $this->db->where($where);
-        $a=$this->db->update($this->table,$data);
+        $a = $this->db->update($this->table, $data);
         return $this->db->affected_rows($a);
     }
     function delete_data($where)
     {
         $this->db->where($where);
-        $a=$this->db->delete($this->table);
+        $a = $this->db->delete($this->table);
         return $this->db->affected_rows($a);
     }
-    
+    function view_qr($qr_id)
+    {
+        $this->db->where('qr_id', $qr_id);
+        return $this->db->get($this->table);
+    }
 }

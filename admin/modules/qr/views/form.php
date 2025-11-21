@@ -1,36 +1,19 @@
  <div class="col-sm-12 well">
  	<div class="col-sm-12">
  		<form name="form1" id="form1" method="post" action="" autocomplete="off">
- 			<input type="text" name="c_id" ng-model="x.c_id" hidden>
+ 			<input type="text" name="qr_id" ng-model="x.qr_id" hidden>
 
  			<div class="col-sm-12 mb-2">
  				<label>Name</label>
- 				<input name="c_name" class="form-control" ng-model="x.c_name" autofocus>
+ 				<input name="name" class="form-control" ng-model="x.name" autofocus>
  			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>Firm Name</label>
- 				<input name="f_name" class="form-control" ng-model="x.f_name" autofocus>
- 			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>City</label>
- 				<input name="city" class="form-control" ng-model="x.city" autofocus>
- 			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>Product</label>
- 				<input name="product" class="form-control" ng-model="x.product" autofocus>
- 			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>Qty</label>
- 				<input name="qty" class="form-control" ng-model="x.qty" autofocus>
- 			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>Complaint Number</label>
- 				<input name="c_no" class="form-control" ng-model="x.c_no" autofocus>
- 			</div>
- 			<div class="col-sm-12 mb-2">
- 				<label>Date</label>
- 				<input name="c_date" type="date" class="form-control" ng-model="x.c_date" autofocus>
- 			</div>
+
+			<div class="col-sm-12 mb-2">
+				<label>Profile Picture</label>
+				<input type="file" name="image" ng-model="x.images" class="form-control" autofocus>
+				<input ng-model="x.image" name="old_image" hidden>
+				<p>Select any picture.</p>
+			</div>
 
  			<div class="col-sm-12 mb-2">
  				<label for="">Status</label>
@@ -74,43 +57,5 @@
 
  	.mb-2 {
  		margin-bottom: 10px;
- 	}
-
- 	.star-rating {
- 		display: flex;
- 		align-items: center;
- 		gap: 5px;
- 	}
-
- 	.star-rating input[type="radio"] {
- 		display: none;
- 	}
-
- 	.star-rating label {
- 		font-size: 24px;
- 		color: #ddd;
- 		cursor: pointer;
- 		transition: color 0.2s;
- 	}
-
- 	.star-rating input[type="radio"]:checked~label,
- 	.star-rating label:hover,
- 	.star-rating label:hover~label {
- 		color: #ffc107;
- 	}
-
- 	.star-rating {
- 		flex-direction: row-reverse;
- 		justify-content: flex-end;
- 	}
-
- 	.star-rating input[type="radio"]:checked~label,
- 	.star-rating input[type="radio"]:checked~label~label {
- 		color: #ffc107;
- 	}
-
- 	.star-rating label:hover,
- 	.star-rating label:hover~label {
- 		color: #ffc107;
  	}
  </style>

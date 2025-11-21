@@ -20,27 +20,21 @@ class Qr extends MX_Controller
         $this->load->library('form_validation');
 
         // Validation rules
-        $this->form_validation->set_rules("c_name", "Name", "required|trim");
-        $this->form_validation->set_rules("f_name", "Firm Name", "required|trim");
-        $this->form_validation->set_rules("city", "City", "required|trim");
-        $this->form_validation->set_rules("product", "Product", "required|trim");
-        $this->form_validation->set_rules("qty", "Quantity", "required|trim");
-        $this->form_validation->set_rules("c_no", "Complaint Number", "required|trim");
-        $this->form_validation->set_rules("c_date", "Date", "required|trim");
+        $this->form_validation->set_rules("name", "Name", "required|trim");
 
         if ($this->form_validation->run() == TRUE) {
-            $data['c_name'] = trim($_POST['c_name']);
-            $data['f_name'] = trim($_POST['f_name']);
-            $data['city'] = trim($_POST['city']);
-            $data['product'] = trim($_POST['product']);
-            $data['qty'] = trim($_POST['qty']);
-            $data['c_no'] = trim($_POST['c_no']);  
-            $data['c_date'] = trim($_POST['c_date']);
+            $data['name'] = trim($_POST['name']);
             $data['status'] = isset($_POST['status']) ? 1 : 0;
 
-            // Check for update or insert
-            if (!empty($_POST['c_id'])) {
-                $where['c_id'] = $_POST['c_id'];
+            if (!empty($_FILES['image']['name'])) {
+                $data['image'] = $this->image_upload($_FILES['image']['name']);
+                if ($_POST['old_image']) {
+                    $this->remove_image($_POST['old_image']);
+                }
+            }
+
+            if (!empty($_POST['qr_id'])) {
+                $where['qr_id'] = $_POST['qr_id'];
                 echo $this->mdl_qr->update_data($where, $data);
             } else {
                 echo $this->mdl_qr->add_data($data);
@@ -49,32 +43,95 @@ class Qr extends MX_Controller
             echo validation_errors();
         }
     }
-
-
     function view_data()
     {
-        $where = null;
-        if (isset($_GET['c_id']))
-            $where['c_id'] = $_GET['c_id'];
-
-        if (isset($_GET['data']))
-            $select = $_GET['data'];
-        else
-            $select = "*";
-
-        $return = $this->mdl_qr->view_data($where, $select);
+        $return = $this->mdl_qr->view_data();
         $this->output->set_content_type('application/json')->set_output(json_encode($return->result_array()));
     }
-
     function delete_data()
     {
-        if (isset($_GET['c_id']) && $_GET['c_id']) {
+        if (isset($_GET['qr_id']) && $_GET['qr_id']) {
 
-            $where['c_id'] = $_GET['c_id'];
+            $worker_data = $this->mdl_qr->view_qr($_GET['qr_id']);
+
+            if ($worker_data->result_array()[0]['image']) {
+                $this->remove_image($worker_data->result_array()[0]['image']);
+            }
+
+            $where['qr_id'] = $_GET['qr_id'];
             echo $this->mdl_qr->delete_data($where);
         } else
             echo "Not Deleted";
     }
+    function image_upload($title)
+    {
+        $folder = "qr";
+        // upload coder starts here
+        $config['upload_path'] = './assets/temp';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['new_image'] = "./assets/uploads/$folder/";
+        $config['min_width'] = 100;
 
+        $rand_number = mt_rand(0, 85);
+        $timestamp = time();
+        //             $title = str_replace(" ", "_", $title);
+        $config['file_name'] = $rand_number . $timestamp;
 
+        $config['overwrite'] = false;
+        $config['remove_spaces'] = true;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('image')) {
+            echo $this->upload->display_errors();
+            die();
+        } else {
+            $image = $this->upload->data();
+            if ($this->input->post('width')) {
+                $config['width'] = $this->input->post('width');
+            } else {
+                if ($image['image_width'] > 720)
+                    $config['width'] = 720;
+            }
+            // image manipulation resizing 1
+            $config['source_image'] = './assets/temp/' . $image['file_name'];
+            $config['maintain_ratio'] = TRUE;
+
+            $this->load->library('image_lib', $config);
+            $this->image_lib->initialize($config);
+
+            if (!$this->image_lib->resize()) {
+                echo $this->image_lib->display_errors();
+                die();
+            }
+
+            $this->image_lib->clear();
+            // image manipulation resizing 2
+            $config['source_image'] = './assets/temp/' . $image['file_name'];
+            $config['new_image'] = "./assets/uploads/$folder/thumb/";
+            $config['file_name'] = $rand_number . $timestamp;
+            $config['maintain_ratio'] = TRUE;
+            if ($image['image_width'] > 100) {
+                $config['width'] = 100;
+            }
+            $config['overwrite'] = FALSE;
+            $this->load->library('image_lib', $config);
+            $this->image_lib->initialize($config);
+            if (!$this->image_lib->resize()) {
+                echo $this->image_lib->display_errors();
+                die();
+            } else {
+                unlink($config['source_image']);
+                return $image['file_name'];
+            }
+        }
+    }
+    function remove_image($title)
+    {
+        if (substr($title, 0, 4) != "http") {
+            $path1 = "./assets/uploads/qr/" . $title;
+            unlink($path1);
+            $path2 = "./assets/uploads/qr/thumb/" . $title;
+            unlink($path2);
+        }
+    }
 }

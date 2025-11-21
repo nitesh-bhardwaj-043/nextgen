@@ -5,89 +5,119 @@
 	</ol>
 </div>
 <div class="col-sm-12 well">
-	<div class="table_horizontal">
-		<div class="row">
-			<div class="col-xs-7 col-md-9">
-				<div class="input-group custom_addon">
-					<div class="input-group-addon" style="box-shadow:none; -webkit-box-shadow:none;">
-						<i class="fa fa-search"></i>
-					</div>
-					<input type="text" ng-model="search_text" placeholder="Search here...">
+	<div class="row">
+		<div class="col-sm-6">
+			<h4>Deposit Requests</h4>
+			<div class="input-group custom_addon">
+				<div class="input-group-addon" style="box-shadow:none; -webkit-box-shadow:none;">
+					<i class="fa fa-search"></i>
+				</div>
+				<input type="text" ng-model="search_deposit" placeholder="Search deposits...">
+			</div>
+			<div class="table-data">
+				<div class="table-responsive-custom">
+					<table class="table table-hover">
+						<thead>
+							<tr class="active">
+								<th>Sl No.</th>
+								<th>User</th>
+								<th>Amount</th>
+								<th>UTR</th>
+								<th>Photo</th>
+								<th>Date</th>
+								<th style="width:160px">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr dir-paginate="y in datadb_deposit | filter: search_deposit | itemsPerPage: 10">
+								<td>{{$index+1}}</td>
+								<td>{{y.user_id}}</td>
+								<td>{{y.amount}}</td>
+								<td>{{y.utr}}</td>
+								<td>
+									<a href="javascript:void(0)" ng-if="y.image" ng-click="showImage(y.image)">
+										<img ng-src="<?= base_url('uploads/') ?>{{y.image}}" alt="proof" style="height:40px;">
+									</a>
+								</td>
+								<td>{{y.created_at}}</td>
+								<td>
+									<div ng-if="y.status == '0'">
+										<button class="btn btn-success btn-xs" ng-click="approveDeposit(y.req_id)">Approve</button>
+										<button class="btn btn-danger btn-xs" ng-click="disapproveDeposit(y.req_id)">Disapprove</button>
+									</div>
+									<div ng-if="y.status == '1'">
+										<span class="label label-success">Approved</span>
+									</div>
+									<div ng-if="y.status == '2'">
+										<span class="label label-danger">Disapproved</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-			<div class="col-xs-5 col-md-3 text-right">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestModal">
-					Add request
-				</button>
+			<dir-pagination-controls boundary-links="true" template-url="app/pagination"></dir-pagination-controls>
+		</div>
+
+		<div class="col-sm-6">
+			<h4>Withdraw Requests</h4>
+			<div class="input-group custom_addon">
+				<div class="input-group-addon" style="box-shadow:none; -webkit-box-shadow:none;">
+					<i class="fa fa-search"></i>
+				</div>
+				<input type="text" ng-model="search_withdraw" placeholder="Search withdrawals...">
 			</div>
+			<div class="table-data">
+				<div class="table-responsive-custom">
+					<table class="table table-hover">
+						<thead>
+							<tr class="active">
+								<th>Sl No.</th>
+								<th>User</th>
+								<th>Amount</th>
+								<th>Date</th>
+								<th style="width:160px">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr dir-paginate="y in datadb_withdraw | filter: search_withdraw | itemsPerPage: 10">
+								<td>{{$index+1}}</td>
+								<td>{{y.user_id}}</td>
+								<td>{{y.amount}}</td>
+								<td>{{y.created_at}}</td>
+								<td>
+									<div ng-if="y.status == '0'">
+										<button class="btn btn-success btn-xs" ng-click="approveWithdraw(y.req_id)">Approve</button>
+										<button class="btn btn-danger btn-xs" ng-click="disapproveWithdraw(y.req_id)">Disapprove</button>
+									</div>
+									<div ng-if="y.status == '1'">
+										<span class="label label-success">Approved</span>
+									</div>
+									<div ng-if="y.status == '2'">
+										<span class="label label-danger">Disapproved</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<dir-pagination-controls boundary-links="true" template-url="app/pagination"></dir-pagination-controls>
 		</div>
-	</div>
-	<div class="table-data">
-		<div class="table-responsive-custom">
-			<table class="table table-hover">
-				<thead>
-					<tr class="active">
-						<th>Sl No.</th>
-						<th>Customer Name</th>
-						<th>Firm Name</th>
-						<th>City</th>
-						<th>Product</th>
-						<th>Qty</th>
-						<th>Complaint Number</th>
-						<th>Date</th>
-						<th style="width:85px">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr dir-paginate="y in datadb | filter: search_text | itemsPerPage: 10">
-						<td>{{$index+1}}</td>
-						<td>{{y.c_name}}</td>
-						<td>{{y.f_name}}</td>
-						<td>{{y.city}}</td>
-						<td>{{y.product}}</td>
-						<td>{{y.qty}}</td>
-						<td>{{y.c_no}}</td>
-						<td>{{y.c_date}}</td>
-						<td>
-							<div style="height:25px;width:25px;border-radius:50%;background:red" ng-if="y.status == '0'">
-							</div>
-							<div style="height:25px;width:25px;border-radius:50%;background:green" ng-if="y.status == '1'">
-							</div>
-						</td>
-						<td>
-							<a href="javascript:void(0)" ng-click="update_call(y)" data-toggle="modal"
-								data-target=".bs-example-modal-sm">
-								<span class="fa fa-pencil fa-2x"></span>
-							</a>
-							&nbsp;&nbsp;
-							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.c_id)">
-								<span class="fa fa-trash fa-2x"></span>
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="col-sm-12">
-		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-			template-url="app/pagination"></dir-pagination-controls>
 	</div>
 </div>
 
-<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel">
-	<div class="modal-dialog" role="document">
+<!-- Image Modal -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
-
 			<div class="modal-header">
-				<button type="button" class="close" ng-click="close_modal()">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="requestModalLabel">Add request</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Proof Image</h4>
 			</div>
-
-			<div class="modal-body" style="max-height:70vh; overflow-y:auto;">
-				<?php $this->load->view('form'); ?>
+			<div class="modal-body text-center">
+				<img ng-src="<?= base_url('uploads/') ?>{{modalImage}}" alt="proof" style="max-width:100%;">
 			</div>
 		</div>
 	</div>

@@ -26,6 +26,7 @@ app.controller("ctrl_qr", function ($scope, $http) {
 
   $scope.filter_new = function () {
     $scope.x = {};
+    $scope.x.images = "";
   };
 
   $scope.save_data = function (y) {
@@ -45,7 +46,7 @@ app.controller("ctrl_qr", function ($scope, $http) {
           messages(
             "success",
             "Success!",
-            "qr details Saved Successfully",
+            "QR details Saved Successfully",
             3000
           );
           $scope.filter_new();
@@ -60,22 +61,22 @@ app.controller("ctrl_qr", function ($scope, $http) {
       },
     });
   };
-  $scope.delete_data = function (c_id) {
+  $scope.delete_data = function (qr_id) {
     if (
       confirm("Deleting qr details may hamper your data associated with it.")
     ) {
       if (confirm("Are you Sure to DELETE ??")) {
-        $http.get("qr/delete_data?c_id=" + c_id).success(function (data) {
+        $http.get("qr/delete_data?qr_id=" + qr_id).success(function (data) {
           console.log(data);
           if (data == "1") {
             messages(
               "success",
               "Success!",
-              "qr details Deleted Successfully",
+              "QR details Deleted Successfully",
               3000
             );
           } else {
-            messages("danger", "Warning!", "qr details not Deleted", 4000);
+            messages("danger", "Warning!", "QR details not Deleted", 4000);
           }
           $scope.loader();
         });

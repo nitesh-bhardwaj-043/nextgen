@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 class Mdl_request extends CI_Model
 {
     private $table;
@@ -7,31 +7,73 @@ class Mdl_request extends CI_Model
         parent::__construct();
         $this->table = "request";
     }
-    function view_data($where=null,$select="*")
+    function view_data($where = null, $select = "*")
     {
         $this->db->select($select);
-        if($where) 
+        if ($where)
             $this->db->where($where);
-        $this->db->where('status',1);
-        $this->db->order_by('trans_id',"desc");
-        return $this->db->get( $this->table);
+        $this->db->where('status', 1);
+        $this->db->order_by('trans_id', "desc");
+        return $this->db->get($this->table);
     }
+
+    // Generic view for any table (d_request, w_request, etc.)
+    function view_table($table, $where = null, $select = "*")
+    {
+        $this->db->select($select);
+        $this->db->from($table);
+        if ($where)
+            $this->db->where($where);
+        $this->db->order_by('req_id', 'desc');
+        return $this->db->get();
+    }
+
     function add_data($data)
     {
-        $a=$this->db->insert($this->table,$data);
+        $a = $this->db->insert($this->table, $data);
         return $this->db->affected_rows($a);
     }
-    function update_data($where,$data)
+    function update_data($where, $data)
     {
         $this->db->where($where);
-        $a=$this->db->update($this->table,$data);
+        $a = $this->db->update($this->table, $data);
         return $this->db->affected_rows($a);
     }
     function delete_data($where)
     {
         $this->db->where($where);
-        $a=$this->db->delete($this->table);
+        $a = $this->db->delete($this->table);
         return $this->db->affected_rows($a);
     }
-    
+
+    // Update arbitrary table
+    function update_table($table, $where, $data)
+    {
+        $this->db->where($where);
+        return $this->db->update($table, $data);
+    }
+
+    // Insert a transaction record
+    function add_transaction($data)
+    {
+        return $this->db->insert('transactions', $data);
+    }
+
+    // Wallet helpers
+    function get_wallet($user_id)
+    {
+        $q = $this->db->get_where('wallet', array('user_id' => $user_id));
+        return $q->row_array();
+    }
+
+    function update_wallet($user_id, $new_amount)
+    {
+        $this->db->where('user_id', $user_id);
+        return $this->db->update('wallet', array('amount' => $new_amount));
+    }
+
+    function insert_wallet($user_id, $amount)
+    {
+        return $this->db->insert('wallet', array('user_id' => $user_id, 'amount' => $amount));
+    }
 }

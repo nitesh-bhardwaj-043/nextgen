@@ -1,24 +1,19 @@
 <div class="heading">
 	<ol class="breadcrumb">
 		<li><a href="#/">Dashboard</a></li>
-		<li><a href="javascript:void(0)">users</a></li>
+		<li><a href="javascript:void(0)">Users</a></li>
 	</ol>
 </div>
 <div class="col-sm-12 well">
 	<div class="table_horizontal">
 		<div class="row">
-			<div class="col-xs-7 col-md-9">
+			<div class="col-xs-12">
 				<div class="input-group custom_addon">
 					<div class="input-group-addon" style="box-shadow:none; -webkit-box-shadow:none;">
 						<i class="fa fa-search"></i>
 					</div>
 					<input type="text" ng-model="search_text" placeholder="Search here...">
 				</div>
-			</div>
-			<div class="col-xs-5 col-md-3 text-right">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usersModal">
-					Add users
-				</button>
 			</div>
 		</div>
 	</div>
@@ -28,42 +23,23 @@
 				<thead>
 					<tr class="active">
 						<th>Sl No.</th>
-						<th>Customer Name</th>
-						<th>Firm Name</th>
-						<th>City</th>
-						<th>Product</th>
-						<th>Qty</th>
-						<th>Complaint Number</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Wallet</th>
+						<th>UPI ID</th>
 						<th>Date</th>
-						<th style="width:85px">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr dir-paginate="y in datadb | filter: search_text | itemsPerPage: 10">
 						<td>{{$index+1}}</td>
-						<td>{{y.c_name}}</td>
-						<td>{{y.f_name}}</td>
-						<td>{{y.city}}</td>
-						<td>{{y.product}}</td>
-						<td>{{y.qty}}</td>
-						<td>{{y.c_no}}</td>
-						<td>{{y.c_date}}</td>
-						<td>
-							<div style="height:25px;width:25px;border-radius:50%;background:red" ng-if="y.status == '0'">
-							</div>
-							<div style="height:25px;width:25px;border-radius:50%;background:green" ng-if="y.status == '1'">
-							</div>
-						</td>
-						<td>
-							<a href="javascript:void(0)" ng-click="update_call(y)" data-toggle="modal"
-								data-target=".bs-example-modal-sm">
-								<span class="fa fa-pencil fa-2x"></span>
-							</a>
-							&nbsp;&nbsp;
-							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.c_id)">
-								<span class="fa fa-trash fa-2x"></span>
-							</a>
-						</td>
+						<td>{{y.name}}</td>
+						<td>{{y.phone}}</td>
+						<td>{{y.email}}</td>
+						<td>{{y.amount}}</td>
+						<td>{{y.upi_id || "-"}}</td>
+						<td>{{y.created_at}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -75,23 +51,6 @@
 	</div>
 </div>
 
-<div class="modal fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-
-			<div class="modal-header">
-				<button type="button" class="close" ng-click="close_modal()">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="usersModalLabel">Add user</h4>
-			</div>
-
-			<div class="modal-body" style="max-height:70vh; overflow-y:auto;">
-				<?php $this->load->view('form'); ?>
-			</div>
-		</div>
-	</div>
-</div>
 <style>
 	.table-responsive-custom {
 		width: 100%;

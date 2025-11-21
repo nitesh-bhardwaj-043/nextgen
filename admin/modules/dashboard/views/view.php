@@ -7,34 +7,34 @@
             <div class="row g-4">
             
                 <!-- Newly Arrived Products -->
-                <div class="col-md-3 column" ui-sref="complaints">
+                <div class="col-md-3 column" ui-sref="qr">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
                         <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
-                        <h5 class="mt-2">Pending Complaints</h5>
-                        <label><b>{{complaints}}</b> items</label>
+                        <h5 class="mt-2">QR</h5>
+                        <label><b>{{qr}}</b> items</label>
                     </div>
                 </div>
-                <div class="col-md-3 column" ui-sref="fcomplaints">
+                <div class="col-md-3 column" ui-sref="request">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
                         <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
-                        <h5 class="mt-2">Complaints</h5>
-                        <label><b>{{complaints}}</b> items</label>
+                        <h5 class="mt-2">Request</h5>
+                        <label><b>{{request}}</b> items</label>
                     </div>
                 </div>
-                <div class="col-md-3 column" ui-sref="ccomplaints">
+                <div class="col-md-3 column" ui-sref="transactions">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
                         <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
                         <h5 class="mt-2">Completed Complaints</h5>
-                        <label><b>{{ccomplaints}}</b> items</label>
+                        <label><b>{{transactions}}</b> items</label>
                     </div>
                 </div>
 
                 <!-- Company Expenses -->
-                <div class="col-md-3 column" ui-sref="expenses">
+                <div class="col-md-3 column" ui-sref="users">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
                         <span class="feature-icon text-blue"><i class="fa fa-credit-card fa-2x"></i></span>
-                        <h5 class="mt-2">Expenses</h5>
-                        <label><b>{{expenses}}</b> items</label>
+                        <h5 class="mt-2">Users</h5>
+                        <label><b>{{users}}</b> items</label>
                     </div>
                 </div>
             </div>

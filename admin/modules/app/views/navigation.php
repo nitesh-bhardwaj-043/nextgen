@@ -15,23 +15,19 @@
 					<span class="menu-text">Das<u><b>h</b></u>board</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/expenses" accesskey="n"><i class="fa fa-credit-card"></i>
-					<span class="menu-text">Expenses</span><span class="selected"></span></a>
+			<li class="sidepadding"><a href="#/qr" accesskey="n"><i class="fa fa-credit-card"></i>
+					<span class="menu-text">QR</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/complaints" accesskey="n"><i class="fa fa-tags"></i>
-					<span class="menu-text">Pending Complaints</span><span class="selected"></span></a>
+			<li class="sidepadding"><a href="#/request" accesskey="n"><i class="fa fa-tags"></i>
+					<span class="menu-text">Request</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/fcomplaints" accesskey="n"><i class="fa fa-tags"></i>
-					<span class="menu-text">Complaints</span><span class="selected"></span></a>
+			<li class="sidepadding"><a href="#/transactions" accesskey="n"><i class="fa fa-tags"></i>
+					<span class="menu-text">Transactions</span><span class="selected"></span></a>
 			</li>
-			<li class="sidepadding"><a href="#/ccomplaints" accesskey="n"><i class="fa fa-tags"></i>
-					<span class="menu-text">Completed Complaints</span><span class="selected"></span></a>
-			</li>
-
-			<li class="sidepadding"><a href="#/dealership" accesskey="n"><i class="fa fa-tags"></i>
-					<span class="menu-text">Dealership</span><span class="selected"></span></a>
+			<li class="sidepadding"><a href="#/users" accesskey="n"><i class="fa fa-tags"></i>
+					<span class="menu-text">Users</span><span class="selected"></span></a>
 			</li>
 		</ul>
 	</aside>
