@@ -25,6 +25,15 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
                 <li class="<?= ($current_segment == 'help') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("help") ?>">Help</a>
                 </li>
+                <?php if ($this->session->userdata('logged_in')): ?>
+                    <li class="<?= ($current_segment == 'setting') ? 'mil-active' : '' ?>">
+                        <a href="<?= site_url("setting") ?>">Setting</a>
+                    </li>
+                    <li class="<?= ($current_segment == 'dashboard') ? 'mil-active' : '' ?>">
+                        <a href="<?= site_url("dashboard") ?>">Dashboard</a>
+                    </li>
+
+                <?php endif;  ?>
             </ul>
         </nav>
 
@@ -48,8 +57,6 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
         <?php if ($this->session->userdata('logged_in')): ?>
 
             <div class="auth-wrapper">
-                <a href="<?= site_url("dashboard") ?>">Dashboard</a>
-                <span style="color:#fff;">/</span>
                 <a href="<?= site_url("logout") ?>">Logout</a>
             </div>
 

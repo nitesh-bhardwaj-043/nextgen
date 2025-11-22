@@ -57,6 +57,8 @@ class Services extends MX_Controller
     }
     function deposit()
     {
+        if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -65,6 +67,8 @@ class Services extends MX_Controller
     }
     function withdraw()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -73,6 +77,8 @@ class Services extends MX_Controller
     }
     function dashboard()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -81,6 +87,8 @@ class Services extends MX_Controller
     }
     function setting()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -89,6 +97,8 @@ class Services extends MX_Controller
     }
     function editinfo()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -97,6 +107,8 @@ class Services extends MX_Controller
     }
     function bank()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -105,6 +117,8 @@ class Services extends MX_Controller
     }
     function changepassword()
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";
@@ -129,6 +143,8 @@ class Services extends MX_Controller
     }
     function forgotpass(): void
     {
+         if(!$this->session->userdata('user_id'))
+            redirect("login");
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";

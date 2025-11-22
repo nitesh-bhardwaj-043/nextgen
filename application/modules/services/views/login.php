@@ -134,6 +134,7 @@
                     if (data == "1") {
                         message = "<div class='alert alert-success'><p style='color:green;'>Login successful</p></div>";
                         $("#loginform").trigger('reset');
+                        window.location.href = "<?php echo site_url('services/dashboard') ?>";
                     } else if (data == "2") {
                         message = "<div class='alert alert-danger'><p>Phone number not found</p></div>";
                     } else if (data == "3") {
