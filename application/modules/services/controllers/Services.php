@@ -79,6 +79,11 @@ class Services extends MX_Controller
     {
          if(!$this->session->userdata('user_id'))
             redirect("login");
+         
+        $this->load->model('mdl_services');
+        $data['dashboard'] = $this->mdl_services->dashboard();
+        $data['user'] = $this->mdl_services->user();
+
         $data['title'] = "";
         $data['description'] = "";
         $data['module'] = "services";

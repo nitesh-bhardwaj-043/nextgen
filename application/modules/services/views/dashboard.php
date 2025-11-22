@@ -1,25 +1,3 @@
-<?php
-// dashboard.php
-if (!isset($user)) {
-    $user = [
-        'name' => 'Rahul Kumar',
-        'email' => 'rahul@example.com',
-        'phone' => '919876543210',
-        'total_invested' => 125000.50,
-        'interest_credited' => 1025.75
-    ];
-}
-
-function mask_phone_last4($phone)
-{
-    $digits = preg_replace('/\D/', '', $phone);
-    $len = strlen($digits);
-    if ($len <= 4)
-        return str_repeat('X', $len);
-    return str_repeat('X', $len - 4) . substr($digits, -4);
-}
-?>
-
 <div id="smooth-wrapper" class="mil-wrapper">
     <div class="mil-progress-track">
         <div class="mil-progress"></div>
@@ -33,32 +11,31 @@ function mask_phone_last4($phone)
                 <div class="muted">Here's your account summary</div>
             </div>
         </div>
-
         <div class="grid">
             <div>
                 <div class="card profile">
                     <div class="avatar"><?= htmlspecialchars(substr($user['name'], 0, 1)) ?></div>
                     <div style="margin-top:10px; font-weight:700;"><?= htmlspecialchars($user['name']) ?></div>
                     <div class="muted"><?= htmlspecialchars($user['email']) ?></div>
-                    <div class="muted" style="margin-top:6px;">+<?= mask_phone_last4($user['phone']) ?></div>
+                    <div class="muted" style="margin-top:6px;">+<?= $user['phone'] ?></div>
 
                     <div style="margin-top:14px; width:100%;">
                         <div class="metric">
                             <div>
                                 <div class="label">Total Invested</div>
-                                <div class="val">₹ <?= number_format($user['total_invested'], 2) ?></div>
+                                <div class="val">₹ <?= $dashboard['amount'] ?></div>
                             </div>
                             <div style="text-align:right;">
                                 <div class="label">Interest Credited</div>
-                                <div class="val">₹ <?= number_format($user['interest_credited'], 2) ?></div>
+                                <div class="val">₹ <?= $dashboard['amount'] - $dashboard['t_amount'] ?></div>
                             </div>
                         </div>
 
                         <div class="actions">
-                            <button class="btn-primary" onclick="location.href='<?= site_url() ?>withdraw'">
+                            <button class="btn-primary" onclick="location.href='<?= site_url() ?>/withdraw'">
                                 <i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp; Withdraw
                             </button>
-                            <button class="btn-outline" onclick="location.href='<?= site_url() ?>deposit'">
+                            <button class="btn-outline" onclick="location.href='<?= site_url() ?>/deposit'">
                                 <i class="fa-solid fa-plus"></i>&nbsp; Deposit
                             </button>
                         </div>
@@ -73,16 +50,22 @@ function mask_phone_last4($phone)
                         <div style="flex:1; min-width:140px;">
                             <div class="balance-card">
                                 <div class="muted">Available Balance</div>
-                                <div class="big">₹ <?= number_format($user['total_invested'] - 5000, 2) ?></div>
+                                <div class="big">₹ <?=  $dashboard['t_amount'] ?></div>
                                 <div class="muted">(after reserve)</div>
                             </div>
                         </div>
 
                         <div style="flex:1; min-width:140px;">
                             <div class="balance-card">
+                                <div class="muted">Pending Deposits</div>
+                                <div class="big">₹ <?= $dashboard['d_amount'] ?></div>
+                            </div>
+                        </div>
+
+                        <div style="flex:1; min-width:140px;">
+                            <div class="balance-card">
                                 <div class="muted">Pending Withdrawals</div>
-                                <div class="big">₹ 0.00</div>
-                                <div class="muted">No pending requests</div>
+                                <div class="big">₹ <?= $dashboard['w_amount'] ?></div>
                             </div>
                         </div>
                     </div>
