@@ -2,11 +2,20 @@
 // Get current URI segment
 $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
 ?>
-
+<style>
+    .logo{
+        height:100px;
+    }
+    @media (max-width:900px){
+        .logo{
+            height:60px;
+        }
+    }
+</style>
 <div class="mil-top-panel">
     <div class="container">
         <a href="<?= site_url() ?>index.html" class="mil-logo">
-            <img src="<?= base_url() ?>assets/images/.png" alt="NextGen" width="83" height="32">
+            <img src="<?= base_url() ?>assets/images/logo_final.png" alt="NextGen" class="logo">
         </a>
         <nav class="mil-top-menu">
             <ul>
@@ -51,6 +60,13 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
                 color: #fff;
                 text-decoration: none;
                 font-weight: 500;
+            }
+            @media (max-width:900px){
+                .auth-wrapper{
+                    gap:5px;
+                    padding: 4px 8px;
+                    font-size: 13px;
+                }
             }
         </style>
 
