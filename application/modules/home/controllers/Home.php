@@ -13,7 +13,7 @@ class Home extends MX_Controller
     }
     function index()
     {
-        $data['title'] = "";
+        $data['title'] = "NextGen";
         $data['description'] = "";
         $data['keywords'] = "NextGen";
         $data['module'] = "home";

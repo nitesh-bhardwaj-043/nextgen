@@ -18,23 +18,6 @@
 
                             <h2 class="mil-text-gradient-3 mil-mb-40">Settings</h2>
 
-                            <!-- EDIT INFO -->
-                            <a href="<?= site_url("editinfo") ?>" class="mil-card mil-mb-20" style="
-                           padding:20px; 
-                           border-radius:20px; 
-                           background:#fff; 
-                           box-shadow:0 0 25px rgba(230,230,230,0.8);
-                           display:flex; 
-                           justify-content:space-between; 
-                           align-items:center;
-                       ">
-                                <div>
-                                    <h5 class="mil-mb-5">Edit Information</h5>
-                                    <p class="mil-soft mil-mb-0">Update your name, email & phone details</p>
-                                </div>
-                                <i class="fas fa-chevron-right" style="color:#999;"></i>
-                            </a>
-
                             <!-- BANK DETAILS -->
                             <a href="<?= site_url("bank") ?>" class="mil-card mil-mb-20" style="
                            padding:20px; 

@@ -1,4 +1,5 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 class Services extends MX_Controller
 {
 
@@ -57,9 +58,9 @@ class Services extends MX_Controller
     }
     function deposit()
     {
-        if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Deposit";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "deposit";
@@ -67,9 +68,9 @@ class Services extends MX_Controller
     }
     function withdraw()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Withdraw";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "withdraw";
@@ -77,14 +78,14 @@ class Services extends MX_Controller
     }
     function dashboard()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-         
+
         $this->load->model('mdl_services');
         $data['dashboard'] = $this->mdl_services->dashboard();
         $data['user'] = $this->mdl_services->user();
 
-        $data['title'] = "";
+        $data['title'] = "Dashboard";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "dashboard";
@@ -92,9 +93,9 @@ class Services extends MX_Controller
     }
     function setting()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Setting";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "setting";
@@ -102,9 +103,9 @@ class Services extends MX_Controller
     }
     function editinfo()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Edit Info";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "editinfo";
@@ -112,9 +113,9 @@ class Services extends MX_Controller
     }
     function bank()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Bank Details";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "bank";
@@ -122,17 +123,17 @@ class Services extends MX_Controller
     }
     function changepassword()
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
         $data['title'] = "";
-        $data['description'] = "";
+        $data['description'] = "Change Password";
         $data['module'] = "services";
         $data['view_file'] = "changepassword";
         echo Modules::run('template/layout2', $data);
     }
     function login()
     {
-        $data['title'] = "";
+        $data['title'] = "Login";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "login";
@@ -140,7 +141,7 @@ class Services extends MX_Controller
     }
     function register()
     {
-        $data['title'] = "";
+        $data['title'] = "Register";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "register";
@@ -148,9 +149,9 @@ class Services extends MX_Controller
     }
     function forgotpass(): void
     {
-         if(!$this->session->userdata('user_id'))
+        if (!$this->session->userdata('user_id'))
             redirect("login");
-        $data['title'] = "";
+        $data['title'] = "Forgot Password";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "forgotpass";
@@ -159,7 +160,7 @@ class Services extends MX_Controller
     // Terms and Conditions
     function tc(): void
     {
-        $data['title'] = "";
+        $data['title'] = "Terms & Conditions";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "tc";
@@ -167,7 +168,7 @@ class Services extends MX_Controller
     }
     function refer(): void
     {
-        $data['title'] = "";
+        $data['title'] = "Referral";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "refer";
@@ -175,7 +176,7 @@ class Services extends MX_Controller
     }
     function help(): void
     {
-        $data['title'] = "";
+        $data['title'] = "Help";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "help";
@@ -238,4 +239,33 @@ class Services extends MX_Controller
               </div>";
         }
     }
+
+    public function change_password()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('current', 'Current Password', 'required|trim');
+        $this->form_validation->set_rules('new', 'New Password', 'required|trim');
+
+        if ($this->form_validation->run() == true) {
+
+            $this->load->model('mdl_services');
+            $result = $this->mdl_services->change_password();
+
+            echo $result;
+            // 1 = success
+            // 2 = incorrect current password
+            // 0 = error/not logged in
+
+        } else {
+
+            $errors = validation_errors('<li>', '</li>');
+            echo "
+        <div class='alert alert-danger validation-error'>
+            <strong><i class='fa fa-exclamation-circle'></i> Fix the following:</strong>
+            <ul class='mt-2 mb-0'>{$errors}</ul>
+        </div>";
+        }
+    }
+
 }

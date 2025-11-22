@@ -1,4 +1,5 @@
-<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 class Mdl_services extends CI_Model
 {
 
@@ -12,7 +13,8 @@ class Mdl_services extends CI_Model
     public function dashboard()
     {
         $user_id = $this->session->userdata('user_id');
-        if (!$user_id) return null;
+        if (!$user_id)
+            return null;
 
         // wallet amounts
         $wallet = $this->db->get_where('wallet', array('user_id' => $user_id))->row_array();
@@ -40,7 +42,8 @@ class Mdl_services extends CI_Model
             'w_amount' => $w_amount
         );
     }
-    public function user(){
+    public function user()
+    {
         $user_id = $this->session->userdata('user_id');
 
         $this->db->select("name,phone,email");
@@ -48,69 +51,114 @@ class Mdl_services extends CI_Model
         $this->db->where('user_id', $user_id);
         return $this->db->get()->row_array();
     }
+
     public function loginform()
     {
-        $phone = $this->input->post('phone');
+        $login_input = $this->input->post('phone'); // phone or email
         $password = $this->input->post('password');
 
-        $user = $this->db->where('phone', $phone)->get('users')->row();
+        // Check user by phone OR email
+        $user = $this->db
+            ->where('phone', $login_input)
+            ->or_where('email', $login_input)
+            ->get('users')
+            ->row();
 
         if (!$user) {
-            return 2;
+            return 2; // user not found
         }
 
-        if ($user->password == $password) {
-            $this->session->set_userdata('phone', $phone);
+        // Verify hashed password
+        if (password_verify($password, $user->password)) {
+
+            // set session
             $this->session->set_userdata('logged_in', true);
             $this->session->set_userdata('user_id', $user->user_id);
-            return 1;
+            $this->session->set_userdata('phone', $user->phone);
+            $this->session->set_userdata('email', $user->email);
+
+            return 1; // success
         } else {
-            return 3;
+            return 3; // incorrect password
         }
     }
+
     public function registerform()
     {
-        $name      = $this->input->post('name');
-        $phone     = $this->input->post('phone');
-        $email     = $this->input->post('email');
-        $password  = $this->input->post('password');
+        $name = $this->input->post('name');
+        $phone = $this->input->post('phone');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
         $cpassword = $this->input->post('cpassword');
 
         if ($password !== $cpassword) {
             return 3;
         }
 
-        // 2. Check if user already exists (phone OR email)
-        $exists = $this->db->where('phone', $phone)
+        // Check if exists
+        $exists = $this->db
+            ->where('phone', $phone)
             ->or_where('email', $email)
             ->get('users')
             ->num_rows();
 
         if ($exists > 0) {
-            return 2; // User already exists
+            return 2;
         }
 
-        // 3. Create user
+        // HASH THE PASSWORD
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         $data = [
-            'name'     => $name,
-            'phone'    => $phone,
-            'email'    => $email,
-            'password' => $password
+            'name' => $name,
+            'phone' => $phone,
+            'email' => $email,
+            'password' => $hashed_password
         ];
 
         $this->db->insert('users', $data);
         $user_id = $this->db->insert_id();
 
-        // 4. Create wallet entry for the new user
-        $this->db->insert('wallet', [
-            'user_id' => $user_id
-        ]);
-
-        // 5. Create bank_details entry with empty defaults
-        $this->db->insert('bank_details', [
-            'user_id' => $user_id,
-        ]);
-
-        return 1; // Successfully registered
+        // Create wallet
+        $this->db->insert('wallet', ['user_id' => $user_id]);
+        // Create bank details
+        $this->db->insert('bank_details', ['user_id' => $user_id]);
+        return 1;
     }
+
+    // Change Password
+    public function change_password()
+    {
+        $user_id = $this->session->userdata('user_id');
+
+        if (!$user_id) {
+            return 0; // not logged in
+        }
+
+        $current = $this->input->post('current');
+        $new = $this->input->post('new');
+
+        // Fetch user
+        $user = $this->db->where('user_id', $user_id)->get('users')->row();
+
+        if (!$user) {
+            return 0;
+        }
+
+        // Check current password
+        if (!password_verify($current, $user->password)) {
+            return 2; // incorrect current password
+        }
+
+        // Hash new password
+        $hashed = password_hash($new, PASSWORD_DEFAULT);
+
+        // Update DB
+        $this->db->where('user_id', $user_id)->update('users', [
+            'password' => $hashed
+        ]);
+
+        return 1; // success
+    }
+
 }
