@@ -158,8 +158,8 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css" type="text/css" media="all">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="<?= base_url() ?>assets/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= base_url() ?>assets/images/favi.png" type="image/x-icon">
+  <link rel="icon" href="<?= base_url() ?>assets/images/favi.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link

@@ -8,7 +8,7 @@
   <title>MPR Computers<?= date("D d M Y") ?></title>
 
   <link href="<?= base_url() ?>assets/admin/css/main.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favicon.png" />
+  <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favi.png" />
 
   <style>
     body {

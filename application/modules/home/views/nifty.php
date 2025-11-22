@@ -1,10 +1,10 @@
 <style>
     .mil-banner{
-        padding-top: 90px!important;
+        padding-top: 40px!important;
     }
     @media (max-width:900px){
         .mil-banner{
-            padding-top: 90px!important;
+            padding-top: 30px!important;
         }
     }
 </style>

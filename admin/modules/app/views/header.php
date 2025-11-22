@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $this->session->userdata('name'); ?> <?= date("D d M Y") ?></title>
-    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favicon.png">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favi.png">
     <link href="<?= base_url("assets") ?>/admin/css/main.css" rel="stylesheet">
     <style type="text/css">
         @media print {

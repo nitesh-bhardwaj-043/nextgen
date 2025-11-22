@@ -1,3 +1,8 @@
+<style>
+    .mil-features{
+        margin-top: 100px;
+    }
+</style>
 <!-- wrapper -->
 <div id="smooth-wrapper" class="mil-wrapper">
 
@@ -25,7 +30,27 @@
     <div id="smooth-content">
 
 
-
+        <div class="mil-features">
+            <div class="container">
+                <div class="row flex-sm-row-reverse justify-content-between align-items-center">
+                    <div class="col-xl-6 mil-mb-80">
+                        <h2 class="mil-mb-30 mil-up">Ease and Security in Every Transaction</h2>
+                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">With Plax, transferring funds has never been
+                            so simple and secure. From local transfers to international payments, our platform gives you
+                            peace of mind knowing your transactions are protected. Discover a new era in bank transfers.
+                        </p>
+                        <div class="mil-up"><a href="<?=site_url("dashboard")?>" class="mil-btn mil-m mil-add-arrow">Get Started</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 mil-mb-80">
+                        <div class="mil-image-frame mil-up">
+                            <img src="<?= base_url() ?>assets/images/111.png" alt="image" class="mil-scale-img"
+                                data-value-1="1" data-value-2="1.2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- banner -->
         <?php $this->load->view('nifty'); ?>
 
@@ -34,14 +59,14 @@
             <div class="container">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-xl-6 mil-mb-80">
-                        <h2 class="mil-mb-30 mil-light mil-up">Simplicity in Every Payment</h2>
+                        <h2 class="mil-mb-30  mil-up">Simplicity in Every Payment</h2>
                         <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">From utilities to credit cards, we simplify
                             the process so you can focus on what really matters.</p>
                         <ul class="mil-list-1 mil-accent">
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15 mil-light mil-up">Payment for Services</h5>
+                                        <h5 class="mil-mb-15  mil-up">Payment for Services</h5>
                                         <p class="mil-text-m mil-pale-2 mil-up">Make utility payments, bills and more
                                             with just a few <br>clicks, without hassle or delays.</p>
                                     </a>
@@ -50,7 +75,7 @@
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15 mil-light mil-up">Efficient Credit Card Management</h5>
+                                        <h5 class="mil-mb-15  mil-up">Efficient Credit Card Management</h5>
                                         <p class="mil-text-m mil-pale-2 mil-up">Control your credit cards, make minimum
                                             or full <br>payments, and keep track of your transactions efficiently.</p>
                                     </a>
@@ -59,7 +84,7 @@
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15 mil-light mil-up">Automatic Payments Program:</h5>
+                                        <h5 class="mil-mb-15  mil-up">Automatic Payments Program:</h5>
                                         <p class="mil-text-m mil-pale-2 mil-up">Forget about deadlines. Set up automatic
                                             payments <br>so your bills are paid on time, without worry.</p>
                                     </a>
@@ -69,8 +94,8 @@
                     </div>
                     <div class="col-xl-5 mil-mb-80">
                         <div class="mil-image-frame mil-up">
-                            <img src="img/home-5/3.png" alt="image" class="mil-scale-img" data-value-1="1"
-                                data-value-2="1.2">
+                            <img src="<?= base_url() ?>assets/images/girl_phone.png" alt="image" class="mil-scale-img"
+                                data-value-1="1" data-value-2="1.2">
                         </div>
                     </div>
                 </div>
@@ -79,27 +104,7 @@
         <!-- features end -->
 
         <!-- features -->
-        <div class="mil-features mil-p-0-80">
-            <div class="container">
-                <div class="row flex-sm-row-reverse justify-content-between align-items-center">
-                    <div class="col-xl-6 mil-mb-80">
-                        <h2 class="mil-mb-30 mil-light mil-up">Ease and Security in Every Transaction</h2>
-                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">With Plax, transferring funds has never been
-                            so simple and secure. From local transfers to international payments, our platform gives you
-                            peace of mind knowing your transactions are protected. Discover a new era in bank transfers.
-                        </p>
-                        <div class="mil-up"><a href="about.html" class="mil-btn mil-m mil-add-arrow">Learn more</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-5 mil-mb-80">
-                        <div class="mil-image-frame mil-up">
-                            <img src="img/home-5/4.png" alt="image" class="mil-scale-img" data-value-1="1"
-                                data-value-2="1.2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <!-- <div class="mil-banner mil-dissolve">
 
@@ -127,37 +132,6 @@
             </div>
         </div> -->
         <!-- banner end -->
-
-        <!-- brands -->
-        <div class="mil-brands mil-p-160-160">
-            <div class="container">
-                <h5 class="mil-text-center mil-soft mil-mb-60 mil-up">Join over 7,000 satisfied customers who enjoy our
-                    service!</h5>
-                <div class="row justify-content-center">
-                    <div class="col-3 col-md-2 mil-text-center">
-                        <div class="mil-brand">
-                            <img src="<?= base_url() ?>assets/images/1.svg" alt="brand" class="mil-up">
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2 mil-text-center">
-                        <div class="mil-brand">
-                            <img src="<?= base_url() ?>assets/images/2.svg" alt="brand" class="mil-up">
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2 mil-text-center">
-                        <div class="mil-brand">
-                            <img src="<?= base_url() ?>assets/images/3.svg" alt="brand" class="mil-up">
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2">
-                        <div class="mil-brand mil-text-center">
-                            <img src="<?= base_url() ?>assets/images/4.svg" alt="brand" class="mil-up">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- brands end -->
 
         <!-- features -->
 
