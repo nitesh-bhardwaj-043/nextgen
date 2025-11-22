@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2025 at 01:45 PM
--- Server version: 8.0.40
+-- Generation Time: Nov 22, 2025 at 01:49 PM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,20 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin_profile` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `adwords` text,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `adwords` text DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin_profile`
 --
 
 INSERT INTO `admin_profile` (`id`, `name`, `username`, `password`, `adwords`, `timestamp`) VALUES
-(3, 'vansh packers and movers', 'vnsadmin', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-07-28 07:11:18');
+(1, 'NextGen', 'admin', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-11-20 17:53:57');
 
 -- --------------------------------------------------------
 
@@ -50,11 +50,22 @@ INSERT INTO `admin_profile` (`id`, `name`, `username`, `password`, `adwords`, `t
 --
 
 CREATE TABLE `bank_details` (
-  `b_id` int NOT NULL,
-  `upi_id` varchar(100) NOT NULL,
-  `user_id` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `b_id` int(11) NOT NULL,
+  `upi_id` varchar(100) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `holder_name` varchar(100) DEFAULT NULL,
+  `acc_no` varchar(100) DEFAULT NULL,
+  `ifsc_code` varchar(50) DEFAULT NULL,
+  `branch_name` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bank_details`
+--
+
+INSERT INTO `bank_details` (`b_id`, `upi_id`, `user_id`, `holder_name`, `acc_no`, `ifsc_code`, `branch_name`, `created_at`) VALUES
+(1, NULL, 1, NULL, NULL, NULL, NULL, '2025-11-22 10:34:25');
 
 -- --------------------------------------------------------
 
@@ -63,13 +74,13 @@ CREATE TABLE `bank_details` (
 --
 
 CREATE TABLE `d_request` (
-  `req_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `amount` int NOT NULL,
+  `req_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
   `utr` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-pending , 1-approved , 2 - disapproved',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -79,10 +90,10 @@ CREATE TABLE `d_request` (
 --
 
 CREATE TABLE `qr` (
-  `qr_id` int NOT NULL,
+  `qr_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0'
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -92,11 +103,11 @@ CREATE TABLE `qr` (
 --
 
 CREATE TABLE `transactions` (
-  `trans_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `trans_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `type` varchar(100) NOT NULL,
-  `amount` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `amount` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -106,13 +117,20 @@ CREATE TABLE `transactions` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `phone` bigint DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `phone`, `email`, `password`, `created_at`) VALUES
+(1, 'Nitesh Bhardwaj', 9933666517, 'nitesh@gmail.com', '123456', '2025-11-22 10:34:25');
 
 -- --------------------------------------------------------
 
@@ -121,11 +139,19 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `wallet` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `amount` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` decimal(11,2) NOT NULL DEFAULT 0.00,
+  `t_amount` decimal(11,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wallet`
+--
+
+INSERT INTO `wallet` (`id`, `user_id`, `amount`, `t_amount`, `created_at`) VALUES
+(1, 1, '0.00', '0.00', '2025-11-22 10:34:25');
 
 -- --------------------------------------------------------
 
@@ -134,11 +160,11 @@ CREATE TABLE `wallet` (
 --
 
 CREATE TABLE `w_request` (
-  `req_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `amount` int NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `req_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-pending , 1-approved , 2 - disapproved',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -202,49 +228,49 @@ ALTER TABLE `w_request`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bank_details`
 --
 ALTER TABLE `bank_details`
-  MODIFY `b_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `d_request`
 --
 ALTER TABLE `d_request`
-  MODIFY `req_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `qr`
 --
 ALTER TABLE `qr`
-  MODIFY `qr_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `qr_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `trans_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wallet`
 --
 ALTER TABLE `wallet`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `w_request`
 --
 ALTER TABLE `w_request`
-  MODIFY `req_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
