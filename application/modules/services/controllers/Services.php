@@ -430,7 +430,7 @@ class Services extends MX_Controller
         <body>
             <div class='email-wrapper'>
                 <div class='email-header'>
-                    <img src='https://techelevatr.in/nextgen/index.php/logo_final.png' alt='NextGenHybrid Logo'>
+                    <img src='https://techelevatr.in/nextgen/assets/images/logo_final.png' alt='NextGenHybrid Logo'>
                     <h1>NextGenHybrid</h1>
                     <p>Your Trusted Investment Partner</p>
                 </div>
@@ -485,7 +485,7 @@ class Services extends MX_Controller
             $this->form_validation->set_rules('holder_name', 'Account Holder Name', 'required');
             $this->form_validation->set_rules('acc_no', 'Account Number', 'required');
             $this->form_validation->set_rules('ifsc_code', 'IFSC Code', 'required');
-            $this->form_validation->set_rules('branch_name', 'Bank Name', 'required');
+            $this->form_validation->set_rules('bank_name', 'Bank Name', 'required');
             $this->form_validation->set_rules('confirm_acc_no', 'Confirm Account Number', 'required|matches[acc_no]');
         } elseif ($payment_method === 'upi') {
             $this->form_validation->set_rules('upi_id', 'UPI ID', 'required');
@@ -501,14 +501,14 @@ class Services extends MX_Controller
                 $data['holder_name'] = $this->input->post('holder_name');
                 $data['acc_no'] = $this->input->post('acc_no');
                 $data['ifsc_code'] = $this->input->post('ifsc_code');
-                $data['branch_name'] = $this->input->post('branch_name');
+                $data['bank_name'] = $this->input->post('bank_name');
                 $data['upi_id'] = NULL;
             } else {
                 $data['upi_id'] = $this->input->post('upi_id');
                 $data['holder_name'] = NULL;
                 $data['acc_no'] = NULL;
                 $data['ifsc_code'] = NULL;
-                $data['branch_name'] = NULL;
+                $data['bank_name'] = NULL;
             }
 
             // Call the model to update or insert the details

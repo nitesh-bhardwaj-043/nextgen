@@ -66,8 +66,8 @@ $upi_id = isset($user_bank_details->upi_id) ? $user_bank_details->upi_id : null;
                                     placeholder="Bank IFSC code">
 
                                 <label class="mil-soft">Bank Name</label>
-                                <input type="text" class="mil-input mil-mb-40" name="branch_name"
-                                    value="<?php echo isset($user_bank_details->branch_name) ? htmlspecialchars($user_bank_details->branch_name) : ''; ?>"
+                                <input type="text" class="mil-input mil-mb-40" name="bank_name"
+                                    value="<?php echo isset($user_bank_details->bank_name) ? htmlspecialchars($user_bank_details->bank_name) : ''; ?>"
                                     placeholder="Bank Name">
                             </div>
 
