@@ -37,6 +37,7 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
                 padding: 8px 16px;
                 border-radius: 6px;
             }
+
             .auth-wrapper a {
                 color: #fff;
                 text-decoration: none;
@@ -44,11 +45,23 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
             }
         </style>
 
-        <div class="auth-wrapper">
-            <a href="<?= site_url("login") ?>">Login</a>
-            <span style="color:#fff;">/</span>
-            <a href="<?= site_url("register") ?>">Sign Up</a>
-        </div>
+        <?php if ($this->session->userdata('logged_in')): ?>
+
+            <div class="auth-wrapper">
+                <a href="<?= site_url("dashboard") ?>">Dashboard</a>
+                <span style="color:#fff;">/</span>
+                <a href="<?= site_url("logout") ?>">Logout</a>
+            </div>
+
+        <?php else: ?>
+
+            <div class="auth-wrapper">
+                <a href="<?= site_url("login") ?>">Login</a>
+                <span style="color:#fff;">/</span>
+                <a href="<?= site_url("register") ?>">Sign Up</a>
+            </div>
+
+        <?php endif; ?>
 
         <div class="mil-menu-btn"><span></span></div>
     </div>

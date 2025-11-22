@@ -26,6 +26,8 @@ $route["forgot-password"]="services/forgotpass";
 $route["terms-and-conditions"]="services/tc";
 $route["refer"]="services/refer";
 $route["help"]="services/help";
+$route['logout'] = 'services/logout';
+
 
 
 $route["office-relocation"]="services/office";
