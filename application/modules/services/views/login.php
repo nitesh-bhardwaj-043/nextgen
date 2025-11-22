@@ -35,6 +35,12 @@
         cursor: pointer;
         color: #888;
     }
+    @media screen and (max-width: 1200px) {
+    .mil-banner {
+        margin-top: 0px;
+
+    }
+}
 </style>
 
 <div class="mil-banner">

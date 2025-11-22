@@ -58,49 +58,49 @@
                         <div class="mil-card mil-up">
                             <form method="post" id="registerform" onsubmit="return false">
 
-                                <h2 class="mil-text-gradient-3 mil-mb-10" style="text-align:center;"> Create Account </h2>
+                                <h2 class="mil-text-gradient-3 mil-mb-10" style="text-align:center;"> Create Account
+                                </h2>
                                 <p class="mil-soft mil-mb-40" style="text-align:center;"> Join us and start investing
                                     smartly </p>
                                 <!-- FULL NAME -->
                                 <label class="mil-mb-10">Full Name</label>
-                                <input
-                                    type="text" name="name" class="mil-input mil-mb-30" placeholder="Enter your full name">
+                                <input type="text" name="name" class="mil-input mil-mb-30"
+                                    placeholder="Enter your full name">
                                 <!-- PHONE -->
                                 <label class="mil-mb-10">Phone Number</label>
-                                <input type="text" name="phone"
-                                    class="mil-input mil-mb-30" placeholder="Enter your phone number">
+                                <input type="text" name="phone" class="mil-input mil-mb-30"
+                                    placeholder="Enter your phone number">
                                 <!-- EMAIL -->
-                                <label
-                                    class="mil-mb-10">Email</label>
+                                <label class="mil-mb-10">Email</label>
                                 <input type="email" name="email" class="mil-input mil-mb-30"
                                     placeholder="Enter your email">
                                 <!-- PASSWORD -->
-                                <label
-                                    class="mil-mb-10">Password</label>
+                                <label class="mil-mb-10">Password</label>
                                 <div class="password-wrapper">
                                     <input type="password" name="password" id="reg_password" class="mil-input"
                                         placeholder="Create password">
-                                    <span class="password-toggle"
-                                        onclick="togglePassword('reg_password', this)">
+                                    <span class="password-toggle" onclick="togglePassword('reg_password', this)">
                                         <i class="fas fa-eye"></i> </span>
                                 </div>
                                 <!-- CONFIRM PASSWORD -->
                                 <label class="mil-mb-10">Confirm Password</label>
-                                <div class="password-wrapper"> <input type="password" name="cpassword" id="reg_cpassword" class="mil-input"
-                                        placeholder="Confirm password"> <span class="password-toggle"
-                                        onclick="togglePassword('reg_cpassword', this)">
+                                <div class="password-wrapper">
+                                    <input type="password" name="cpassword" id="reg_cpassword" class="mil-input"
+                                        placeholder="Confirm password">
+                                    <span class="password-toggle" onclick="togglePassword('reg_cpassword', this)">
                                         <i class="fas fa-eye"></i> </span>
                                 </div>
                                 <!-- REFERRAL CODE -->
                                 <label class="mil-mb-10">Referral Code (Optional)</label>
                                 <input type="text" class="mil-input mil-mb-30" placeholder="Enter referral code">
                                 <div id="resultregister"></div>
-                                <button
-                                    id="submitregister" type="submit" class="mil-btn mil-md mil-add-arrow" style="width:100%; margin-bottom:20px;"> Register
+                                <button id="submitregister" type="submit" class="mil-btn mil-md mil-add-arrow"
+                                    style="width:100%; margin-bottom:20px;"> Register
                                 </button>
-                                <div style="text-align:center;"> <span class="mil-soft">Already have an account?</span> <a
-                                        href="<?= site_url("login") ?>"
-                                        style="color:#f27457; text-decoration:none; font-weight:600;"> Login </a> </div>
+                                <div style="text-align:center;"> <span class="mil-soft">Already have an account?</span>
+                                    <a href="<?= site_url("login") ?>"
+                                        style="color:#f27457; text-decoration:none; font-weight:600;"> Login </a>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -110,8 +110,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function() {
-        $('#submitregister').click(function(e) {
+    $(function () {
+        $('#submitregister').click(function (e) {
             e.preventDefault();
 
             $('#resultregister').show().empty();
@@ -121,10 +121,10 @@
                 type: "POST",
                 url: "<?php echo site_url('services/registerform') ?>",
                 data: $("#registerform").serialize(),
-                beforeSend: function() {
+                beforeSend: function () {
                     $('#resultregister').html('<div class="alert alert-info">Please wait...</div>');
                 },
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
                     $('#resultregister').empty();
                     let message = "";
@@ -143,14 +143,14 @@
                     $('#resultregister').html(message);
                     $('#submitregister').prop('disabled', false);
 
-                    setTimeout(function() {
-                        $('#resultregister').fadeOut('slow', function() {
+                    setTimeout(function () {
+                        $('#resultregister').fadeOut('slow', function () {
                             $(this).show().empty();
                         });
                     }, 4000);
 
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     let errorMsg = `
                         <div class="alert alert-danger">
                         <strong>Request Failed!</strong><br>

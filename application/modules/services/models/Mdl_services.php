@@ -160,5 +160,47 @@ class Mdl_services extends CI_Model
 
         return 1; // success
     }
+    public function get_user_by_email($email)
+    {
+        $this->db->where('email', $email);
+        return $this->db->get('users')->row();  // Return the user row if found, else false
+    }
+    public function get_user_by_id($user_id)
+    {
+        return $this->db->where('user_id', $user_id)->get('users')->row();  // Adjust the table name to match your database
+    }
+    // In your Mdl_services model
+    public function get_bank_details_by_user_id($user_id)
+    {
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('bank_details');
+        return $query->row();  // Returns a single row or null if no data found
+    }
+
+
+    // Update user password
+    public function update_password($email, $password)
+    {
+        $data = ['password' => $password];
+        $this->db->where('email', $email);
+        return $this->db->update('users', $data);
+    }
+
+    public function update_user_details($data)
+    {
+        $user_id = $data['user_id'];
+
+        // Check if the user already has bank details
+        $existing_details = $this->db->where('user_id', $user_id)->get('bank_details')->row();
+
+        if ($existing_details) {
+            // If details exist, update them
+            $this->db->where('user_id', $user_id);
+            return $this->db->update('bank_details', $data);
+        } else {
+            // If no details exist, insert them
+            return $this->db->insert('bank_details', $data);
+        }
+    }
 
 }

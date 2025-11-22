@@ -1,5 +1,5 @@
 <style>
-    .mil-features{
+    .mil-features {
         margin-top: 100px;
     }
 </style>
@@ -34,13 +34,21 @@
             <div class="container">
                 <div class="row flex-sm-row-reverse justify-content-between align-items-center">
                     <div class="col-xl-6 mil-mb-80">
-                        <h2 class="mil-mb-30 mil-up">Ease and Security in Every Transaction</h2>
-                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">With Plax, transferring funds has never been
-                            so simple and secure. From local transfers to international payments, our platform gives you
-                            peace of mind knowing your transactions are protected. Discover a new era in bank transfers.
+                        <h2 class="mil-mb-30 mil-up">Your Money Deserves More — Earn Profit</h2>
+                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">
+                            Invest smartly and watch your wealth grow every single day. Our platform delivers a clear,
+                            simple <strong>1% daily return</strong>, backed by secure systems, transparent terms, and
+                            real-time tracking—so your money works harder while you stay in control.
+
                         </p>
-                        <div class="mil-up"><a href="<?=site_url("dashboard")?>" class="mil-btn mil-m mil-add-arrow">Get Started</a>
+
+                        <div class="mil-up">
+                            <a href="<?= site_url("dashboard") ?>" class="mil-btn mil-m mil-add-arrow">
+                                Start Earning
+                            </a>
+
                         </div>
+
                     </div>
                     <div class="col-xl-5 mil-mb-80">
                         <div class="mil-image-frame mil-up">
@@ -58,35 +66,42 @@
         <div class="mil-features mil-p-0-80">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
-                    <div class="col-xl-6 mil-mb-80">
-                        <h2 class="mil-mb-30  mil-up">Simplicity in Every Payment</h2>
-                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">From utilities to credit cards, we simplify
-                            the process so you can focus on what really matters.</p>
+                    <div class="col-xl-6 mil-mb-20">
+                        <h2 class="mil-mb-30  mil-up">Profit Daily with Confidence.</h2>
+                        <p class="mil-text-l mil-pale-2 mil-mb-20 mil-up">
+                            Grow your wealth with confidence. Our platform simplifies investing while ensuring you earn
+                            steady daily returns with complete transparency and full control.
+                        </p>
                         <ul class="mil-list-1 mil-accent">
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15  mil-up">Payment for Services</h5>
-                                        <p class="mil-text-m mil-pale-2 mil-up">Make utility payments, bills and more
-                                            with just a few <br>clicks, without hassle or delays.</p>
+                                        <h5 class="mil-mb-15 mil-up">Fully Protected Investments</h5>
+                                        <p class="mil-text-m mil-pale-2 mil-up">
+                                            Your funds stay safeguarded with advanced security protocols.
+                                        </p>
                                     </a>
                                 </div>
                             </li>
+
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15  mil-up">Efficient Credit Card Management</h5>
-                                        <p class="mil-text-m mil-pale-2 mil-up">Control your credit cards, make minimum
-                                            or full <br>payments, and keep track of your transactions efficiently.</p>
+                                        <h5 class="mil-mb-15 mil-up">Real-Time Portfolio Tracking</h5>
+                                        <p class="mil-text-m mil-pale-2 mil-up">
+                                            Monitor returns and activity anytime with full transparency.
+                                        </p>
                                     </a>
                                 </div>
                             </li>
+
                             <li>
                                 <div class="mil-up">
                                     <a href="#." class="mil-up">
-                                        <h5 class="mil-mb-15  mil-up">Automatic Payments Program:</h5>
-                                        <p class="mil-text-m mil-pale-2 mil-up">Forget about deadlines. Set up automatic
-                                            payments <br>so your bills are paid on time, without worry.</p>
+                                        <h5 class="mil-mb-15 mil-up">No Hidden Fees</h5>
+                                        <p class="mil-text-m mil-pale-2 mil-up">
+                                            What you earn is what you get—clean and clear returns.
+                                        </p>
                                     </a>
                                 </div>
                             </li>
@@ -94,7 +109,7 @@
                     </div>
                     <div class="col-xl-5 mil-mb-80">
                         <div class="mil-image-frame mil-up">
-                            <img src="<?= base_url() ?>assets/images/girl_phone.png" alt="image" class="mil-scale-img"
+                            <img src="<?= base_url() ?>assets/images/1a.png" alt="image" class="mil-scale-img"
                                 data-value-1="1" data-value-2="1.2">
                         </div>
                     </div>
@@ -142,11 +157,17 @@
                 <div class="mil-out-frame mil-visible mil-illustration-fix mil-p-160-0">
                     <div class="row align-items-end">
                         <div class="mil-text-center">
-                            <h2 class="mil-mb-30 mil-up">Protected coverage on your <br>purchases with Plax Standard
+                            <h2 class="mil-mb-30 mil-up">
+                                Grow Your Wealth Securely with <br> Next Gen Hybrid
                             </h2>
-                            <p class="mil-text-m mil-soft mil-mb-60 mil-up">Enjoy instant coverage against theft or
-                                accidental damage <br>for the first forty-five (45) days from the date of purchase.</p>
+                            <p class="mil-text-m mil-soft mil-mb-60 mil-up">
+                                Deposit your funds and earn up to <strong>1% daily returns</strong> with our smart
+                                investment model. <br>
+                                We invest in diversified stock market opportunities and share consistent profits with
+                                our users.
+                            </p>
                         </div>
+
                     </div>
                     <div class="mil-illustration-absolute mil-up">
                         <img src="<?= base_url() ?>assets/images/3.png" alt="illustration">
@@ -263,27 +284,34 @@
                 <div class="mil-out-frame mil-visible mil-image mil-illustration-fix mil-p-160-0">
                     <div class="row align-items-end">
                         <div class="mil-text-center">
-                            <h2 class="mil-mb-30 mil-light mil-up">Buy with Confidence, Guaranteed <br>Protection for
-                                your purchases</h2>
-                            <p class="mil-text-m mil-dark-soft mil-mb-60 mil-up">Discover how we make each purchase a
-                                safe and reliable <br>experience for you.</p>
-                            <div class="mil-up mil-mb-60"><a href="<?= site_url() ?>#."
-                                    class="mil-btn mil-button-transform mil-md mil-add-arrow">Protect My Purchases</a>
+                            <h2 class="mil-mb-30 mil-light mil-up">
+                                Earn 5% Rewards — Profit Every Time You Refer
+                            </h2>
+
+                            <p class="mil-text-m mil-dark-soft mil-mb-60 mil-up">
+                                Invite friends, grow your network, and earn a solid
+                                <strong>5% commission</strong> on every investment they make. <br>
+                                Simple, powerful, and designed to boost your income effortlessly.
+                            </p>
+
+                            <div class="mil-up mil-mb-60">
+                                <a href="<?= site_url() ?>#." class="mil-btn mil-button-transform mil-md mil-add-arrow">
+                                    Start Referring
+                                </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="mil-illustration-absolute mil-type-2 mil-up">
-                        <img src="<?= base_url() ?>assets/images/6.png" alt="illustration">
+                        <div class="mil-illustration-absolute mil-type-2 mil-up">
+                            <img src="<?= base_url() ?>assets/images/6.png" alt="illustration">
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- call to action end -->
+
+            <!-- footer -->
+
+            <!-- footer end -->
+
         </div>
-        <!-- call to action end -->
-
-        <!-- footer -->
-
-        <!-- footer end -->
-
+        <!-- content end -->
     </div>
-    <!-- content end -->
-</div>

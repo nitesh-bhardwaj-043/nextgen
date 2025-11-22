@@ -28,9 +28,6 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
                 <li class="<?= ($current_segment == 'withdraw') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("withdraw") ?>">Withdrawal</a>
                 </li>
-                <li class="<?= ($current_segment == 'setting') ? 'mil-active' : '' ?>">
-                    <a href="<?= site_url("setting") ?>">Setting</a>
-                </li>
                 <li class="<?= ($current_segment == 'help') ? 'mil-active' : '' ?>">
                     <a href="<?= site_url("help") ?>">Help</a>
                 </li>
