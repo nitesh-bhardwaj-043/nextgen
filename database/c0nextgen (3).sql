@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2025 at 01:49 PM
+-- Generation Time: Nov 22, 2025 at 05:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -56,7 +56,7 @@ CREATE TABLE `bank_details` (
   `holder_name` varchar(100) DEFAULT NULL,
   `acc_no` varchar(100) DEFAULT NULL,
   `ifsc_code` varchar(50) DEFAULT NULL,
-  `branch_name` varchar(100) DEFAULT NULL,
+  `bank_name` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -64,7 +64,7 @@ CREATE TABLE `bank_details` (
 -- Dumping data for table `bank_details`
 --
 
-INSERT INTO `bank_details` (`b_id`, `upi_id`, `user_id`, `holder_name`, `acc_no`, `ifsc_code`, `branch_name`, `created_at`) VALUES
+INSERT INTO `bank_details` (`b_id`, `upi_id`, `user_id`, `holder_name`, `acc_no`, `ifsc_code`, `bank_name`, `created_at`) VALUES
 (1, NULL, 1, NULL, NULL, NULL, NULL, '2025-11-22 10:34:25');
 
 -- --------------------------------------------------------
