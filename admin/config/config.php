@@ -23,8 +23,8 @@
  |
  */
 
-// $config['base_url'] = 'https://tawaniyas.com/';
-$config['base_url'] = 'http://127.0.0.1/nextgen/';
+$config['base_url'] = 'https://techelevatr.in/nextgen/';
+// $config['base_url'] = 'http://127.0.0.1/nextgen/';
 /*
  |--------------------------------------------------------------------------
  | Index File 
