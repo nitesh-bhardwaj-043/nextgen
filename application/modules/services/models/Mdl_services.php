@@ -10,6 +10,45 @@ class Mdl_services extends CI_Model
         $this->load->database();
     }
 
+    public function referral_code()
+    {
+        $user_id = $this->session->userdata('user_id');
+
+        $this->db->select('referral_code');
+        $this->db->where('user_id', $user_id);
+
+        $row = $this->db->get('users')->row();
+
+        return $row ? $row->referral_code : null;
+    }
+    public function referrals(){
+        $user_id = $this->session->userdata('user_id');
+        if (!$user_id) {
+            return [];
+        }
+
+        // Use 'referral' table; change to 'referrals' if your DB uses that name
+        $this->db->select('r.ref_id, r.ref_by, r.ref_to, r.created_at, u.name as name, u.phone as phone');
+        $this->db->from('referral r');
+        $this->db->join('users u', 'u.user_id = r.ref_to', 'left');
+        $this->db->where('r.ref_by', $user_id);
+        $this->db->order_by('r.created_at', 'desc');
+        return $this->db->get()->result_array();
+    }
+    public function transactions()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by('trans_id', 'desc');
+        return $this->db->get('transactions')->result_array();
+    }
+    public function bank()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $this->db->where('user_id', $user_id);
+        return $this->db->get('bank_details')->row_array();
+    }
+
     public function dashboard()
     {
         $user_id = $this->session->userdata('user_id');
@@ -25,6 +64,7 @@ class Mdl_services extends CI_Model
         $this->db->select('COALESCE(SUM(amount),0) as d_amount', false);
         $this->db->from('d_request');
         $this->db->where('user_id', $user_id);
+        $this->db->where('status', 0);
         $d_row = $this->db->get()->row_array();
         $d_amount = isset($d_row['d_amount']) ? $d_row['d_amount'] : 0;
 
@@ -32,6 +72,7 @@ class Mdl_services extends CI_Model
         $this->db->select('COALESCE(SUM(amount),0) as w_amount', false);
         $this->db->from('w_request');
         $this->db->where('user_id', $user_id);
+        $this->db->where('status', 0);
         $w_row = $this->db->get()->row_array();
         $w_amount = isset($w_row['w_amount']) ? $w_row['w_amount'] : 0;
 
@@ -148,6 +189,7 @@ class Mdl_services extends CI_Model
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $cpassword = $this->input->post('cpassword');
+        $ref_code = $this->input->post('ref_code'); // optional
 
         if ($password !== $cpassword) {
             return 3;
@@ -164,25 +206,57 @@ class Mdl_services extends CI_Model
             return 2;
         }
 
-        // HASH THE PASSWORD
+        // HASH PASSWORD
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+        // Generate referral code
+        $firstName = explode(" ", trim($name))[0];
+        $referral_code = strtoupper($firstName) . '_' . date("dHis");
+
+        // Ensure unique referral code
+        while ($this->db->where('referral_code', $referral_code)->get('users')->num_rows() > 0) {
+            $referral_code = strtoupper($firstName) . '_' . date("dHis") . rand(100, 999);
+        }
+
+        // Prepare user data
         $data = [
             'name' => $name,
             'phone' => $phone,
             'email' => $email,
-            'password' => $hashed_password
+            'password' => $hashed_password,
+            'referral_code' => $referral_code
         ];
 
+        // Insert user
         $this->db->insert('users', $data);
         $user_id = $this->db->insert_id();
 
         // Create wallet
         $this->db->insert('wallet', ['user_id' => $user_id]);
+
         // Create bank details
         $this->db->insert('bank_details', ['user_id' => $user_id]);
+
+        // ❗ Handle referral code logic
+        if (!empty($ref_code)) {
+
+            // Check if referral code exists
+            $referrer = $this->db->where('referral_code', $ref_code)->get('users')->row();
+
+            if (!$referrer) {
+                return 4; // ❌ Invalid referral code
+            }
+
+            // Insert referral mapping
+            $this->db->insert('referral', [
+                'ref_by' => $referrer->user_id,  // existing user (referrer)
+                'ref_to' => $user_id       // new user (referred)
+            ]);
+        }
+
         return 1;
     }
+
 
     // Change Password
     public function change_password()

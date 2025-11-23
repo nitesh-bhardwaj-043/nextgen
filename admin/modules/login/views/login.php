@@ -8,7 +8,7 @@
   <title>MPR Computers<?= date("D d M Y") ?></title>
 
   <link href="<?= base_url() ?>assets/admin/css/main.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favi.png" />
+  <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favi.png" />
 
   <style>
     body {
@@ -62,7 +62,7 @@
     <h2 class="text-center">Welcome Administrator</h2>
 
     <div class="text-center" style="margin:20px 0;">
-      <img src="<?= base_url("assets/images/logo/logo.png") ?>" alt="logo" style="width:150px;">
+      <img src="<?= base_url("assets/images/logo_final.png") ?>" alt="logo" style="width:150px;">
     </div>
 
     <form class="form-horizontal" action="<?= site_url('login/check'); ?>" method="post">

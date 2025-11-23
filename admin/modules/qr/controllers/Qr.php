@@ -24,13 +24,15 @@ class Qr extends MX_Controller
 
         if ($this->form_validation->run() == TRUE) {
             $data['name'] = trim($_POST['name']);
-            $data['status'] = isset($_POST['status']) ? 1 : 0;
 
             if (!empty($_FILES['image']['name'])) {
                 $data['image'] = $this->image_upload($_FILES['image']['name']);
                 if ($_POST['old_image']) {
                     $this->remove_image($_POST['old_image']);
                 }
+            } else {
+                echo "Please Upload Image";
+                die();
             }
 
             if (!empty($_POST['qr_id'])) {

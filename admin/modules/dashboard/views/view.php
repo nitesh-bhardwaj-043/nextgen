@@ -9,22 +9,22 @@
                 <!-- Newly Arrived Products -->
                 <div class="col-md-3 column" ui-sref="qr">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
-                        <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
+                        <span class="feature-icon text-blue"><i class="fa fa-qrcode fa-2x"></i></span>
                         <h5 class="mt-2">QR</h5>
                         <label><b>{{qr}}</b> items</label>
                     </div>
                 </div>
                 <div class="col-md-3 column" ui-sref="request">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
-                        <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
+                        <span class="feature-icon text-blue"><i class="fa fa-inbox fa-2x"></i></span>
                         <h5 class="mt-2">Request</h5>
                         <label><b>{{request}}</b> items</label>
                     </div>
                 </div>
                 <div class="col-md-3 column" ui-sref="transactions">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
-                        <span class="feature-icon text-blue"><i class="fa fa-archive fa-2x"></i></span>
-                        <h5 class="mt-2">Completed Complaints</h5>
+                        <span class="feature-icon text-blue"><i class="fa fa-exchange fa-2x"></i></span>
+                        <h5 class="mt-2">Transactions</h5>
                         <label><b>{{transactions}}</b> items</label>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <!-- Company Expenses -->
                 <div class="col-md-3 column" ui-sref="users">
                     <div class="feature-box shadow-sm text-center p-4 rounded bg-light-blue">
-                        <span class="feature-icon text-blue"><i class="fa fa-credit-card fa-2x"></i></span>
+                        <span class="feature-icon text-blue"><i class="fa fa-users fa-2x"></i></span>
                         <h5 class="mt-2">Users</h5>
                         <label><b>{{users}}</b> items</label>
                     </div>

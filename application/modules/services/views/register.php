@@ -92,7 +92,7 @@
                                 </div>
                                 <!-- REFERRAL CODE -->
                                 <label class="mil-mb-10">Referral Code (Optional)</label>
-                                <input type="text" class="mil-input mil-mb-30" placeholder="Enter referral code">
+                                <input type="text" name="ref_code" class="mil-input mil-mb-30" placeholder="Enter referral code">
                                 <!-- Terms and Conditions Checkbox -->
                                 <div class="mil-mb-20">
                                     <input type="checkbox" id="accept_terms" class="mil-checkbox" style="height:15px;width:15px;">
@@ -152,10 +152,13 @@
                     if (data == "1") {
                         message = "<div class='alert alert-success'><p style='color:green;'>Registered successfully</p></div>";
                         $("#registerform").trigger('reset');
+                        window.location.href = "<?php echo site_url('login') ?>";
                     } else if (data == "2") {
                         message = "<div class='alert alert-danger'><p>User already exists</p></div>";
                     } else if (data == "3") {
                         message = "<div class='alert alert-danger'><p>Password and confirm password do not match</p></div>";
+                    } else if (data == "4") {
+                        message = "<div class='alert alert-danger'><p>Referral Code is invalid</p></div>";
                     } else {
                         message = data;
                     }

@@ -26,8 +26,13 @@
 						<th>Name</th>
 						<th>Phone</th>
 						<th>Email</th>
-						<th>Wallet</th>
+						<th>Invested Amount</th>
+						<th>Total Amount</th>
 						<th>UPI ID</th>
+						<th>Holder Name</th>
+						<th>Account No</th>
+						<th>IFSC Code</th>
+						<th>Bank Name</th>
 						<th>Date</th>
 					</tr>
 				</thead>
@@ -38,7 +43,12 @@
 						<td>{{y.phone}}</td>
 						<td>{{y.email}}</td>
 						<td>{{y.amount}}</td>
+						<td>{{y.t_amount}}</td>
 						<td>{{y.upi_id || "-"}}</td>
+						<td>{{y.holder_name || "-"}}</td>
+						<td>{{y.acc_no || "-"}}</td>
+						<td>{{y.ifsc_code || "-"}}</td>
+						<td>{{y.bank_name || "-"}}</td>
 						<td>{{y.created_at}}</td>
 					</tr>
 				</tbody>

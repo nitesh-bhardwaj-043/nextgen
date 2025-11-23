@@ -15,18 +15,18 @@
 					<span class="menu-text">Das<u><b>h</b></u>board</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/qr" accesskey="n"><i class="fa fa-credit-card"></i>
+			<li class="sidepadding"><a href="#/qr" accesskey="n"><i class="fa fa-qrcode"></i>
 					<span class="menu-text">QR</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/request" accesskey="n"><i class="fa fa-tags"></i>
+			<li class="sidepadding"><a href="#/request" accesskey="n"><i class="fa fa-inbox"></i>
 					<span class="menu-text">Request</span><span class="selected"></span></a>
 			</li>
 
-			<li class="sidepadding"><a href="#/transactions" accesskey="n"><i class="fa fa-tags"></i>
+			<li class="sidepadding"><a href="#/transactions" accesskey="n"><i class="fa fa-exchange"></i>
 					<span class="menu-text">Transactions</span><span class="selected"></span></a>
 			</li>
-			<li class="sidepadding"><a href="#/users" accesskey="n"><i class="fa fa-tags"></i>
+			<li class="sidepadding"><a href="#/users" accesskey="n"><i class="fa fa-users"></i>
 					<span class="menu-text">Users</span><span class="selected"></span></a>
 			</li>
 		</ul>

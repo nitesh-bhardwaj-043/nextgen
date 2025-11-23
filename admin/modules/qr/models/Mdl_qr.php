@@ -1,5 +1,5 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
-class Mdl_workers extends CI_Model
+class Mdl_qr extends CI_Model
 {
     private $table;
     function __construct()

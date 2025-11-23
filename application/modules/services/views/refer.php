@@ -7,7 +7,7 @@
     .mil-card {
         padding: 40px;
         border-radius: 30px;
-        box-shadow: 0 0 45px rgba(220,220,220,0.9);
+        box-shadow: 0 0 45px rgba(220, 220, 220, 0.9);
         background: #fff;
     }
 
@@ -40,38 +40,67 @@
         font-size: 14px;
     }
 
-    .mil-share-btn {
-        width: 100%;
-        height: 50px;
+    .refer-card {
+        margin-top: 28px;
         border-radius: 12px;
-        background: #25D366;
+    }
+
+    /* ------------------------ TABLE IMPROVED CSS ------------------------ */
+
+    .refer-table {
+        border-collapse: separate !important;
+        border-spacing: 0 10px !important; /* spacing between rows */
+    }
+
+    .refer-table thead th {
+        background: #f2f7f8;
         border: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    .mil-share-btn i {
-        font-size: 20px;
-    }
-
-    .mil-title {
-        text-align: center;
-        font-size: 34px;
-        font-weight: 700;
+        padding: 14px;
         color: #0f3f44;
+        font-weight: 700;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
-    .mil-subtitle {
+    .refer-table tbody tr {
+        background: #ffffff;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .refer-table tbody td {
+        padding: 18px 20px !important;
+        font-size: 15px;
+        vertical-align: middle;
+        color: #264043;
+    }
+
+    .refer-table tbody tr:hover {
+        background: #f5fdfd !important;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+        transition: 0.2s ease-in-out;
+    }
+
+    .referred-badge {
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 999px;
+    }
+
+    .avatar-sm {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #e9f6f5;
+        color: #0f3f44;
         text-align: center;
-        color: #5e7a7c;
-        margin-bottom: 40px;
+        line-height: 40px;
+        font-weight: 700;
+        margin-right: 10px;
         font-size: 16px;
     }
 
@@ -82,77 +111,101 @@
     }
 </style>
 
-<div id="smooth-wrapper" class="mil-wrapper">
 
+<div id="smooth-wrapper" class="mil-wrapper">
     <div class="mil-progress-track">
         <div class="mil-progress"></div>
     </div>
-
     <div class="progress-wrap active-progress"></div>
 
     <div id="smooth-content">
-
         <div class="mil-banner mil-dissolve">
             <div class="container">
                 <div class="row justify-content-center">
-
-                    <div class="col-xl-6 col-lg-6 col-md-8">
-
-                        <div class="mil-card mil-up">
-
+                    <div class="col-xl-8 col-lg-9 col-md-10">
+                        <div class="mil-card">
                             <h2 class="mil-title">Refer & Earn</h2>
-                            <p class="mil-subtitle">Invite friends and earn exciting rewards!</p>
+                            <p class="mil-subtitle">Invite friends. Earn 5% of their first deposit when approved.</p>
 
-                            <!-- REFERRAL CODE -->
-                            <label class="mil-label">Your Referral Code</label>
-                            <div class="mil-input-box" id="refCodeBox">
-                                <span id="refCode">NG12345</span>
-                                <span class="mil-copy-btn" onclick="copyText('refCode')">Copy</span>
+                            <!-- Referral Code Row -->
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-8 col-12">
+                                    <label class="form-label mb-2" style="font-weight:600; color:#0f3f44;">Your Referral Code</label>
+                                    <div class="mil-input-box" id="refCodeBox" role="textbox" aria-readonly="true">
+                                        <span id="refCode" style="font-weight:700; letter-spacing:1px;"><?= htmlspecialchars($referral_code) ?></span>
+                                        <span class="mil-copy-btn" onclick="copyText('refCode')" title="Copy referral code">Copy</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- REFERRAL LINK -->
-                            <label class="mil-label" style="margin-top:25px;">Your Referral Link</label>
-                            <div class="mil-input-box" id="refLinkBox">
-                                <span id="refLink">https://nextgen.com/signup?ref=NG12345</span>
-                                <span class="mil-copy-btn" onclick="copyText('refLink')">Copy</span>
+                            <!-- Referral Stats Table -->
+                            <div class="refer-card card mt-4 shadow-sm border-0">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="mb-0" style="font-weight:700;">People you referred</h5>
+                                        <small class="text-muted"><?= count($referrals) ?> total</small>
+                                    </div>
+
+                                    <?php if (!empty($referrals)): ?>
+                                        <div class="table-responsive">
+                                            <table class="table refer-table align-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:60px">#</th>
+                                                        <th>Name</th>
+                                                        <th>Phone</th>
+                                                        <th>Referred On</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <?php $i = 1;
+                                                    foreach ($referrals as $r):
+                                                        $name = htmlspecialchars($r['name'] ?? $r['referred_name'] ?? '-');
+                                                        $phone = htmlspecialchars($r['phone'] ?? $r['referred_phone'] ?? '-');
+                                                        $created = !empty($r['created_at']) ? date('d M Y, H:i', strtotime($r['created_at'])) : '-';
+
+                                                        $status = isset($r['first_deposit_done'])
+                                                            ? ($r['first_deposit_done'] ? 'Bonus paid' : 'Pending')
+                                                            : '';
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $i++ ?></td>
+
+                                                            <td>
+                                                                <span class="avatar-sm"><?= strtoupper(substr($name, 0, 1)) ?></span>
+                                                                <strong><?= $name ?></strong>
+                                                            </td>
+
+                                                            <td><?= $phone ?></td>
+                                                            <td><?= $created ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    <?php else: ?>
+                                        <div class="alert alert-info mb-0">
+                                            You haven't referred anyone yet. Share your code to start earning.
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
 
-                            <!-- SHARE BUTTON -->
-                            <button class="mil-share-btn" onclick="shareOnWhatsApp()">
-                                <i class="fab fa-whatsapp"></i> Share on WhatsApp
-                            </button>
-
-                        </div>
-
+                        </div> <!-- card end -->
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
+
 <script>
-function copyText(elementId) {
-    var text = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(text);
-    alert("Copied Successfully!");
-}
-
-function shareOnWhatsApp() {
-    const code = document.getElementById("refCode").innerText;
-    const link = document.getElementById("refLink").innerText;
-
-    const message =
-        `🔥 *Join NextGen & Start Investing Smartly!* 🔥\n\n` +
-        `Use my referral code: *${code}*\n\n` +
-        `Register here: ${link}\n\n` +
-        `Trusted platform | Daily Growth | Instant Withdrawals`;
-
-    const whatsappURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsappURL, "_blank");
-}
+    function copyText(elementId) {
+        var text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text);
+        alert("Copied Successfully!");
+    }
 </script>

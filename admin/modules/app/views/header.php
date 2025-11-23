@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $this->session->userdata('name'); ?> <?= date("D d M Y") ?></title>
-    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/logo/favi.png">
+    <link rel="icon" type="image/png" href="<?= base_url() ?>assets/images/favi.png">
     <link href="<?= base_url("assets") ?>/admin/css/main.css" rel="stylesheet">
     <style type="text/css">
         @media print {
@@ -33,7 +33,7 @@
         <header id="hoe-header" hoe-lpanel-effect="default">
             <div class="hoe-left-header">
                 <a href="#">
-                    <img id="logo1a" src="<?= base_url() ?>assets/images/logo/logo.png" style="display:inline-block;height: 50px;">
+                    <img id="logo1a" src="<?= base_url() ?>assets/images/logo_final.png" style="display:inline-block;height: 50px;">
                     <span></span>
                 </a>
             </div>
@@ -52,7 +52,6 @@
                                     <i class=" fa fa-angle-down"></i></span>
                             </a>
                             <ul class="dropdown-menu ">
-                                <li><a href="#logs"><i class="fa fa-list"></i>View Logs</a></li>
                                 <li><a href="#change_password"><i class="fa fa-lock"></i>Change Password</a></li>
                                 <li><a href="<?= site_url() ?>/login/logout"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>

@@ -15,14 +15,6 @@
 				<p>Select any picture.</p>
 			</div>
 
- 			<div class="col-sm-12 mb-2">
- 				<label for="">Status</label>
- 				<div class="form-control" style="height: auto; padding: 8px 12px;">
- 					<input type="checkbox" class="form-check-input" id="status" name="status" ng-model="x.status">
- 					<label class="form-check-label" for="status">Active</label>
- 				</div>
- 			</div>
-
  			<div class="clearfix"></div>
 
  			<div class="col-sm-12">

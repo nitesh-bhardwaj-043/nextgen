@@ -14,7 +14,7 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
 </style>
 <div class="mil-top-panel">
     <div class="container">
-        <a href="<?= site_url() ?>index.html" class="mil-logo">
+        <a href="<?= site_url() ?>" class="mil-logo">
             <img src="<?= base_url() ?>assets/images/logo_final.png" alt="NextGen" class="logo">
         </a>
         <nav class="mil-top-menu">
@@ -37,6 +37,9 @@ $current_segment = $this->uri->segment(1); // 'deposit', 'withdraw', etc.
                     </li>
                     <li class="<?= ($current_segment == 'dashboard') ? 'mil-active' : '' ?>">
                         <a href="<?= site_url("dashboard") ?>">Dashboard</a>
+                    </li>
+                    <li class="<?= ($current_segment == 'refer') ? 'mil-active' : '' ?>">
+                        <a href="<?= site_url("refer") ?>">Refer</a>
                     </li>
 
                 <?php endif;  ?>

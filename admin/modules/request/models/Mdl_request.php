@@ -7,9 +7,9 @@ class Mdl_request extends CI_Model
         parent::__construct();
         $this->table = "request";
     }
-    function view_data($where = null, $select = "*")
+    function view_data($where = null)
     {
-        $this->db->select($select);
+        $this->db->select("*");
         if ($where)
             $this->db->where($where);
         $this->db->where('status', 1);
@@ -18,9 +18,10 @@ class Mdl_request extends CI_Model
     }
 
     // Generic view for any table (d_request, w_request, etc.)
-    function view_table($table, $where = null, $select = "*")
+    function view_table($table, $where = null)
     {
-        $this->db->select($select);
+        $this->db->select($table . '.*' . ", users.name as user_name, users.phone as user_phone");
+        $this->db->join('users', 'users.user_id=' . $table . '.user_id');
         $this->db->from($table);
         if ($where)
             $this->db->where($where);
@@ -66,14 +67,14 @@ class Mdl_request extends CI_Model
         return $q->row_array();
     }
 
-    function update_wallet($user_id, $new_amount)
+    function update_wallet($user_id, $new_amount , $new_tamount)
     {
         $this->db->where('user_id', $user_id);
-        return $this->db->update('wallet', array('amount' => $new_amount));
+        return $this->db->update('wallet', array('amount' => $new_amount , 't_amount' => $new_tamount));
     }
 
-    function insert_wallet($user_id, $amount)
+    function insert_wallet($user_id, $amount, $t_amount)
     {
-        return $this->db->insert('wallet', array('user_id' => $user_id, 'amount' => $amount));
+        return $this->db->insert('wallet', array('user_id' => $user_id, 'amount' => $amount, 't_amount' => $t_amount));
     }
 }

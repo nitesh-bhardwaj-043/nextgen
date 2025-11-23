@@ -30,7 +30,6 @@
 						<th>Sl No.</th>
 						<th>Name</th>
 						<th>Image</th>
-						<th>Status</th>
 						<th style="width:85px">Action</th>
 					</tr>
 				</thead>
@@ -40,17 +39,6 @@
 						<td>{{y.name}}</td>
 						<td><img src="<?= base_url('assets/uploads/qr/') ?>{{y.image}}" height="50px" /></td>
 						<td>
-							<div style="height:25px;width:25px;border-radius:50%;background:red" ng-if="y.status == '0'">
-							</div>
-							<div style="height:25px;width:25px;border-radius:50%;background:green" ng-if="y.status == '1'">
-							</div>
-						</td>
-						<td>
-							<a href="javascript:void(0)" ng-click="update_call(y)" data-toggle="modal"
-								data-target=".bs-example-modal-sm">
-								<span class="fa fa-pencil fa-2x"></span>
-							</a>
-							&nbsp;&nbsp;
 							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.qr_id)">
 								<span class="fa fa-trash fa-2x"></span>
 							</a>

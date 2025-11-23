@@ -126,7 +126,6 @@ $upi_id = isset($user_bank_details->upi_id) ? $user_bank_details->upi_id : null;
         }
     }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     function togglePassword() {
@@ -155,7 +154,7 @@ $upi_id = isset($user_bank_details->upi_id) ? $user_bank_details->upi_id : null;
     }
 
     // Form submission via AJAX
-    $('#bank-details-form').submit(function (e) {
+    $('#bank-details-form').submit(function(e) {
         e.preventDefault();
 
         let formData = $("#bank-details-form").serialize(); // Serialize the form data
@@ -164,25 +163,24 @@ $upi_id = isset($user_bank_details->upi_id) ? $user_bank_details->upi_id : null;
             type: 'POST',
             url: '<?php echo site_url('services/update') ?>', // URL to send the form data
             data: formData,
-            beforeSend: function () {
+            beforeSend: function() {
                 $('#message-result').html('<div class="alert alert-info">Saving...</div>');
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response); // Check the response object structure
                 response = JSON.parse(response);
                 let message = '';
                 if (response.status === 'success') {
                     message = `<div class="alert alert-success">${response.message}</div>`;
+
+                    $("#bank-details-form").trigger('reset');
                 } else {
                     message = `<div class="alert alert-danger">${response.message}</div>`;
                 }
 
-                // Check if message is being created properly
-                console.log(message);
-
                 $('#message-result').html(message);
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 let errorMsg = `
                         <div class="alert alert-danger">
                         <strong>Request Failed!</strong><br>

@@ -17,15 +17,8 @@
                                 <p class="mil-soft mil-mb-30">Scan the QR code or use the UPI ID to make payment.</p>
 
                                 <div class="mil-text-center mil-mb-40">
-                                    <img src="https://imgs.search.brave.com/vAFXUpjxSkU9Ibl99G8AwWw5bfEhmacxyBovgZfMddc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ0/NTM4NzgxNS92ZWN0/b3Ivc2Nhbi1tZS1x/ci1jb2RlLXNjYW5u/aW5nLXZlY3Rvci1p/bGx1c3RyYXRpb24u/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXp0TWtFWmVFTHZu/LXZNVndOYmJKdnNa/dmM3dVAzUU5VWlFm/TWw4MTl0a0E9" alt="QR"
+                                    <img src="<?= base_url('assets/uploads/qr/') ?><?= $qr_image ?>" alt="QR"
                                         style="width: 220px; border-radius: 20px; border: 3px solid #222;">
-                                </div>
-
-                                <div class="mil-mb-40">
-                                    <h5 class="mil-text-gradient-2 mil-mb-10">UPI ID:</h5>
-                                    <div class="mil-btn mil-light" style="padding: 12px 20px;">
-                                        plaxfinance@upi
-                                    </div>
                                 </div>
 
                                 <button class="mil-btn mil-sm" onclick="nextStep()">
@@ -91,7 +84,7 @@
                     if (data == "1") {
                         message = "<div class='alert alert-success'><p style='color:green;'>Form submitted successfully</p></div>";
                         $("#depositform").trigger('reset');
-                        window.location.href = "<?php echo site_url('services/dashboard') ?>";
+                        // window.location.href = "<?php // echo site_url('dashboard') ?>";
                     } else {
                         message = data;
                     }

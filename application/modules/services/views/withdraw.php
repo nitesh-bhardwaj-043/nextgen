@@ -65,7 +65,7 @@
                                     Please keep browsing — the amount will be credited to your bank shortly.
                                 </p>
 
-                                <a href="<?= site_url() ?>dashboard" class="mil-btn mil-light mil-md"
+                                <a href="<?= site_url() ?>/dashboard" class="mil-btn mil-light mil-md"
                                     style="width:100%;">
                                     Go to Dashboard
                                 </a>
@@ -105,7 +105,10 @@
                     if (data == '1') {
                         document.getElementById('withdraw-step1').style.display = 'none';
                         document.getElementById('withdraw-step2').style.display = 'block';
-                    } else {
+                    }else if (data == '2') {
+                        $('#withdraw-result').html('<div class="alert alert-danger">Update bank details to withdrawl</div>');
+                    }
+                     else {
                         $('#withdraw-result').html('<div class="alert alert-danger">' + data + '</div>');
                     }
                     $('#submitwithdraw').prop('disabled', false);

@@ -27,6 +27,7 @@ $route["terms-and-conditions"]="services/tc";
 $route["refer"]="services/refer";
 $route["help"]="services/help";
 $route['logout'] = 'services/logout';
+$route['transactions'] = 'services/transactions';
 $route['nifty'] = 'home/nifty';
 $route['nifty-json'] = 'home/nifty_json';
 

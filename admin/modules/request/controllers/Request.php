@@ -58,12 +58,10 @@ class Request extends MX_Controller
         if (isset($_GET['req_id']))
             $where['req_id'] = $_GET['req_id'];
 
-        $select = isset($_GET['data']) ? $_GET['data'] : '*';
-
         if ($table && in_array($table, array('d_request', 'w_request'))) {
-            $return = $this->mdl_request->view_table($table, $where, $select);
+            $return = $this->mdl_request->view_table($table, $where,);
         } else {
-            $return = $this->mdl_request->view_data($where, $select);
+            $return = $this->mdl_request->view_data($where);
         }
 
         $this->output->set_content_type('application/json')->set_output(json_encode($return->result_array()));
@@ -73,6 +71,10 @@ class Request extends MX_Controller
     function approve_deposit()
     {
         $req_id = $this->input->post('req_id');
+        if (!$req_id) {
+            $raw = json_decode(trim(file_get_contents('php://input')), true);
+            if (isset($raw['req_id'])) $req_id = $raw['req_id'];
+        }
         if (!$req_id) {
             echo "Invalid request";
             return;
@@ -96,9 +98,49 @@ class Request extends MX_Controller
         $wallet = $this->mdl_request->get_wallet($row['user_id']);
         if ($wallet) {
             $new_amt = $wallet['amount'] + $row['amount'];
-            $this->mdl_request->update_wallet($row['user_id'], $new_amt);
+            $new_tamt = $wallet['t_amount'] + $row['amount'];
+            $this->mdl_request->update_wallet($row['user_id'], $new_amt, $new_tamt);
         } else {
-            $this->mdl_request->insert_wallet($row['user_id'], $row['amount']);
+            $this->mdl_request->insert_wallet($row['user_id'], $row['amount'], $row['amount']);
+        }
+
+        // REFERRAL LOGIC:
+        // If this is the user's first deposit (no prior 'deposit' transactions), reward the referrer (if any)
+        $this->db->where('user_id', $row['user_id']);
+        $this->db->where('type', 'deposit');
+        $this->db->limit(1);
+        $existing_deposit = $this->db->get('transactions')->num_rows();
+
+        if ($existing_deposit == 1) {
+            // check referral table for a referrer
+            $ref = $this->db->get_where('referral', array('ref_to' => $row['user_id']))->row_array();
+            if ($ref && !empty($ref['ref_by'])) {
+                $ref_by = $ref['ref_by'];
+                // calculate 5% reward
+                $reward = round(($row['amount'] * 0.05), 2);
+                if ($reward > 0) {
+                    // add transaction record for referral credit
+                    $this->mdl_request->add_transaction(array(
+                        'user_id' => $ref_by,
+                        'type'    => 'referral',
+                        'amount'  => $reward
+                    ));
+
+                    // credit referrer's wallet (create if not exists)
+                    $r_wallet = $this->mdl_request->get_wallet($ref_by);
+                    if ($r_wallet) {
+                        $r_new_amt  = $r_wallet['amount'] + $reward;
+                        $r_new_tamt = $r_wallet['t_amount'] + $reward;
+                        $this->mdl_request->update_wallet($ref_by, $r_new_amt, $r_new_tamt);
+                    } else {
+                        $this->mdl_request->insert_wallet($ref_by, $reward, $reward);
+                    }
+                }
+            }else{
+                echo "No referrer";
+            }
+        }else{
+            echo "unable to process, transaction is grater then 0";
         }
 
         if ($this->db->trans_status() === FALSE) {
@@ -113,6 +155,10 @@ class Request extends MX_Controller
     function disapprove_deposit()
     {
         $req_id = $this->input->post('req_id');
+        if (!$req_id) {
+            $raw = json_decode(trim(file_get_contents('php://input')), true);
+            if (isset($raw['req_id'])) $req_id = $raw['req_id'];
+        }
         if (!$req_id) {
             echo "Invalid request";
             return;
@@ -134,6 +180,10 @@ class Request extends MX_Controller
     function approve_withdraw()
     {
         $req_id = $this->input->post('req_id');
+        if (!$req_id) {
+            $raw = json_decode(trim(file_get_contents('php://input')), true);
+            if (isset($raw['req_id'])) $req_id = $raw['req_id'];
+        }
         if (!$req_id) {
             echo "Invalid request";
             return;
@@ -161,7 +211,8 @@ class Request extends MX_Controller
         $this->mdl_request->add_transaction(array('user_id' => $row['user_id'], 'type' => 'withdraw', 'amount' => $row['amount']));
         // deduct wallet
         $new_amt = $wallet['amount'] - $row['amount'];
-        $this->mdl_request->update_wallet($row['user_id'], $new_amt);
+        $new_tamt = $wallet['t_amount'] - $row['amount'];
+        $this->mdl_request->update_wallet($row['user_id'], $new_amt, $new_tamt);
 
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
@@ -175,6 +226,10 @@ class Request extends MX_Controller
     function disapprove_withdraw()
     {
         $req_id = $this->input->post('req_id');
+        if (!$req_id) {
+            $raw = json_decode(trim(file_get_contents('php://input')), true);
+            if (isset($raw['req_id'])) $req_id = $raw['req_id'];
+        }
         if (!$req_id) {
             echo "Invalid request";
             return;

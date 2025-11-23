@@ -67,6 +67,10 @@ class Services extends MX_Controller
     {
         if (!$this->session->userdata('user_id'))
             redirect("login");
+
+        $qr = $this->db->select('image')->from('qr')->limit(1)->get()->row_array();
+        $data['qr_image'] = isset($qr['image']) ? $qr['image'] : null;
+
         $data['title'] = "Deposit";
         $data['description'] = "";
         $data['module'] = "services";
@@ -77,6 +81,7 @@ class Services extends MX_Controller
     {
         if (!$this->session->userdata('user_id'))
             redirect("login");
+
         $data['title'] = "Withdraw";
         $data['description'] = "";
         $data['module'] = "services";
@@ -91,11 +96,26 @@ class Services extends MX_Controller
         $this->load->model('mdl_services');
         $data['dashboard'] = $this->mdl_services->dashboard();
         $data['user'] = $this->mdl_services->user();
+        $data['transactions'] = $this->mdl_services->transactions();
+        $data['bank'] = $this->mdl_services->bank();
 
         $data['title'] = "Dashboard";
         $data['description'] = "";
         $data['module'] = "services";
         $data['view_file'] = "dashboard";
+        echo Modules::run('template/layout2', $data);
+    }
+    function transactions()
+    {
+        if (!$this->session->userdata('user_id'))
+            redirect("login");
+
+        $this->load->model('mdl_services');
+        $data['transactions'] = $this->mdl_services->transactions();
+        $data['title'] = "Transactions";
+        $data['description'] = "";
+        $data['module'] = "services";
+        $data['view_file'] = "transactions";
         echo Modules::run('template/layout2', $data);
     }
     function setting()
@@ -182,6 +202,13 @@ class Services extends MX_Controller
     }
     function refer(): void
     {
+        if (!$this->session->userdata('user_id'))
+            redirect("login");
+
+        $this->load->model('mdl_services');
+        $data['referral_code'] = $this->mdl_services->referral_code();
+        $data['referrals'] = $this->mdl_services->referrals();
+
         $data['title'] = "Referral";
         $data['description'] = "";
         $data['module'] = "services";
@@ -196,10 +223,6 @@ class Services extends MX_Controller
         $data['view_file'] = "help";
         echo Modules::run('template/layout2', $data);
     }
-
-
-
-
     public function logout()
     {
         $this->session->sess_destroy();
@@ -233,6 +256,7 @@ class Services extends MX_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|trim');
+        $this->form_validation->set_rules('ref_code', 'Referral Code', 'trim');
 
         if ($this->form_validation->run() == true) {
 
@@ -262,6 +286,14 @@ class Services extends MX_Controller
 
         if ($this->form_validation->run() == true) {
             $this->load->model('mdl_services');
+            $bank = $this->mdl_services->bank();
+            if (empty($bank)) {
+                echo 2;
+                return;
+            } else if ((empty($bank['acc_no']) || empty($bank['ifsc_code']) || empty($bank['bank_name'])) && empty($bank['upi_id'])) {
+                echo 2;
+                return;
+            }
             $res = $this->mdl_services->withdrawform();
             // return 1 on success to match client logic
             if ($res === true || $res === 1) {
@@ -623,13 +655,8 @@ class Services extends MX_Controller
                 $data['acc_no'] = $this->input->post('acc_no');
                 $data['ifsc_code'] = $this->input->post('ifsc_code');
                 $data['bank_name'] = $this->input->post('bank_name');
-                $data['upi_id'] = NULL;
             } else {
                 $data['upi_id'] = $this->input->post('upi_id');
-                $data['holder_name'] = NULL;
-                $data['acc_no'] = NULL;
-                $data['ifsc_code'] = NULL;
-                $data['bank_name'] = NULL;
             }
 
             // Call the model to update or insert the details
