@@ -82,6 +82,64 @@ class Mdl_services extends CI_Model
             return 3; // incorrect password
         }
     }
+    public function depositform()
+    {
+        $utr = $this->input->post('utr');
+        $image = $this->input->post('image');
+        $amount = $this->input->post('amount');
+        $user_id = $this->session->userdata('user_id');
+
+        if (!$user_id) return "Not logged in";
+        if (!$utr) return "UTR is required";
+        if (!$amount || !is_numeric($amount) || $amount <= 0) return "Invalid amount";
+
+        $data = [
+            'user_id' => $user_id,
+            'amount' => $amount,
+            'utr' => $utr,
+            'image' => $image,
+            'status' => 0
+        ];
+
+        $this->db->insert('d_request', $data);
+        if ($this->db->affected_rows() > 0) {
+            return 1;
+        } else {
+            return "Failed to submit deposit request";
+        }
+    }
+
+    public function withdrawform()
+    {
+        $amount = $this->input->post('amount');
+        $password = $this->input->post('password');
+        $user_id = $this->session->userdata('user_id');
+
+        if (!$user_id) return 'Not logged in';
+        if (!$amount || !is_numeric($amount) || $amount <= 0) return 'Invalid amount';
+        if (!$password) return 'Password required';
+
+        $user = $this->db->where('user_id', $user_id)->get('users')->row_array();
+        if (!$user) return 'User not found';
+
+        // verify password (users.password is hashed)
+        if (!password_verify($password, $user['password'])) return 'Incorrect password';
+
+        // optional: check wallet balance
+        $wallet = $this->db->where('user_id', $user_id)->get('wallet')->row_array();
+        $balance = isset($wallet['t_amount']) ? (float)$wallet['t_amount'] : 0;
+        if ($balance < $amount) return 'Insufficient balance';
+
+        // insert withdraw request with status 0
+        $data = [
+            'user_id' => $user_id,
+            'amount' => $amount,
+            'status' => 0
+        ];
+        $this->db->insert('w_request', $data);
+        if ($this->db->affected_rows() > 0) return 1;
+        return 'Failed to submit withdraw request';
+    }
 
     public function registerform()
     {
@@ -202,5 +260,4 @@ class Mdl_services extends CI_Model
             return $this->db->insert('bank_details', $data);
         }
     }
-
 }

@@ -254,6 +254,32 @@ class Services extends MX_Controller
         }
     }
 
+    function withdrawform()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('amount', 'Amount', 'required|trim|numeric');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+
+        if ($this->form_validation->run() == true) {
+            $this->load->model('mdl_services');
+            $res = $this->mdl_services->withdrawform();
+            // return 1 on success to match client logic
+            if ($res === true || $res === 1) {
+                echo 1;
+            } else {
+                echo $res;
+            }
+        } else {
+            $errors = validation_errors('<li>', '</li>');
+            echo "<div class='alert alert-danger validation-error'>
+                    <strong><i class='fa fa-exclamation-circle'></i> Please correct the following:</strong>
+                    <ul class='mt-2 mb-0'>
+                        {$errors}
+                    </ul>
+                  </div>";
+        }
+    }
+
     public function change_password()
     {
         $this->load->library('form_validation');
@@ -346,6 +372,101 @@ class Services extends MX_Controller
             }
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Password cannot be empty.']);
+        }
+    }
+
+    function depositform()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('utr', 'utr number', 'required|trim');
+        $this->form_validation->set_rules('amount', 'amount', 'required|trim');
+        if ($this->form_validation->run() == true) {
+            // Handle image upload first (field name 'image')
+            $image_file = null;
+            if (!empty($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                // image_upload returns filename on success (or echoes error and dies)
+                $image_file = $this->image_upload('screenshot');
+            }
+
+            // Pass image filename via POST for model compatibility
+            if ($image_file) {
+                $_POST['image'] = $image_file;
+            }
+
+            $this->load->model('mdl_services');
+            $check = $this->mdl_services->depositform();
+            // model returns 1 on success (we'll echo that to keep existing client logic)
+            echo $check;
+        } else {
+            $errors = validation_errors('<li>', '</li>');
+            echo "<div class='alert alert-danger validation-error'>
+                    <strong><i class='fa fa-exclamation-circle'></i> Please correct the following:</strong>
+                    <ul class='mt-2 mb-0'>
+                        {$errors}
+                    </ul>
+                  </div>";
+        }
+    }
+    function image_upload($title)
+    {
+        $folder = "screenshot";
+        // upload coder starts here
+        $config['upload_path'] = './assets/temp';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['new_image'] = "./assets/uploads/$folder/";
+        $config['min_width'] = 100;
+
+        $rand_number = mt_rand(0, 85);
+        $timestamp = time();
+        //             $title = str_replace(" ", "_", $title);
+        $config['file_name'] = $rand_number . $timestamp;
+
+        $config['overwrite'] = false;
+        $config['remove_spaces'] = true;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('image')) {
+            echo $this->upload->display_errors();
+            die();
+        } else {
+            $image = $this->upload->data();
+            if ($this->input->post('width')) {
+                $config['width'] = $this->input->post('width');
+            } else {
+                if ($image['image_width'] > 720)
+                    $config['width'] = 720;
+            }
+            // image manipulation resizing 1
+            $config['source_image'] = './assets/temp/' . $image['file_name'];
+            $config['maintain_ratio'] = TRUE;
+
+            $this->load->library('image_lib', $config);
+            $this->image_lib->initialize($config);
+
+            if (!$this->image_lib->resize()) {
+                echo $this->image_lib->display_errors();
+                die();
+            }
+
+            $this->image_lib->clear();
+            // image manipulation resizing 2
+            $config['source_image'] = './assets/temp/' . $image['file_name'];
+            $config['new_image'] = "./assets/uploads/$folder/thumb/";
+            $config['file_name'] = $rand_number . $timestamp;
+            $config['maintain_ratio'] = TRUE;
+            if ($image['image_width'] > 100) {
+                $config['width'] = 100;
+            }
+            $config['overwrite'] = FALSE;
+            $this->load->library('image_lib', $config);
+            $this->image_lib->initialize($config);
+            if (!$this->image_lib->resize()) {
+                echo $this->image_lib->display_errors();
+                die();
+            } else {
+                unlink($config['source_image']);
+                return $image['file_name'];
+            }
         }
     }
 
@@ -525,6 +646,4 @@ class Services extends MX_Controller
             echo json_encode(['status' => 'error', 'message' => "<ul>{$errors}</ul>"]);
         }
     }
-
-
 }
