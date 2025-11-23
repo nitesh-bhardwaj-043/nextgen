@@ -1,8 +1,3 @@
-<style>
-    .mil-features {
-        margin-top: 100px;
-    }
-</style>
 <!-- wrapper -->
 <div id="smooth-wrapper" class="mil-wrapper">
 
@@ -30,35 +25,7 @@
     <div id="smooth-content">
 
 
-        <div class="mil-features">
-            <div class="container">
-                <div class="row flex-sm-row-reverse justify-content-between align-items-center">
-                    <div class="col-xl-6 mil-mb-80">
-                        <h2 class="mil-mb-30 mil-up">Your Money Deserves More — Earn Profit</h2>
-                        <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">
-                            Invest smartly and watch your wealth grow every single day. Our platform delivers a clear,
-                            simple <strong>1% daily return</strong>, backed by secure systems, transparent terms, and
-                            real-time tracking—so your money works harder while you stay in control.
-
-                        </p>
-
-                        <div class="mil-up">
-                            <a href="<?= site_url("dashboard") ?>" class="mil-btn mil-m mil-add-arrow">
-                                Start Earning
-                            </a>
-
-                        </div>
-
-                    </div>
-                    <div class="col-xl-5 mil-mb-80">
-                        <div class="mil-image-frame mil-up">
-                            <img src="<?= base_url() ?>assets/images/111.png" alt="image" class="mil-scale-img"
-                                data-value-1="1" data-value-2="1.2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- banner -->
         <?php $this->load->view('nifty'); ?>
 
@@ -285,11 +252,11 @@
                     <div class="row align-items-end">
                         <div class="mil-text-center">
                             <h2 class="mil-mb-30 mil-light mil-up">
-                                Earn 5% Rewards — Profit Every Time You Refer
+                                Earn Upto 5% Rewards — Profit Every Time You Refer
                             </h2>
 
                             <p class="mil-text-m mil-dark-soft mil-mb-60 mil-up">
-                                Invite friends, grow your network, and earn a solid
+                                Invite friends, grow your network, and earn upto
                                 <strong>5% commission</strong> on every investment they make. <br>
                                 Simple, powerful, and designed to boost your income effortlessly.
                             </p>

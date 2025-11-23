@@ -93,6 +93,12 @@
                                 <!-- REFERRAL CODE -->
                                 <label class="mil-mb-10">Referral Code (Optional)</label>
                                 <input type="text" class="mil-input mil-mb-30" placeholder="Enter referral code">
+                                <!-- Terms and Conditions Checkbox -->
+                                <div class="mil-mb-20">
+                                    <input type="checkbox" id="accept_terms" class="mil-checkbox" style="height:15px;width:15px;">
+                                    <label for="accept_terms" class="mil-soft"> I accept the <a href="<?=site_url("terms-and-conditions")?>"
+                                            style="color:#f27457;">Terms and Conditions</a></label>
+                                </div>
                                 <div id="resultregister"></div>
                                 <button id="submitregister" type="submit" class="mil-btn mil-md mil-add-arrow"
                                     style="width:100%; margin-bottom:20px;"> Register
@@ -101,6 +107,8 @@
                                     <a href="<?= site_url("login") ?>"
                                         style="color:#f27457; text-decoration:none; font-weight:600;"> Login </a>
                                 </div>
+
+
                             </form>
                         </div>
                     </div>
@@ -111,6 +119,18 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        $('#submitregister').prop('disabled', true);
+
+        // Monitor the checkbox
+        $('#accept_terms').change(function () {
+            if ($(this).is(':checked')) {
+                // Enable the register button if checked
+                $('#submitregister').prop('disabled', false);
+            } else {
+                // Disable the register button if not checked
+                $('#submitregister').prop('disabled', true);
+            }
+        });
         $('#submitregister').click(function (e) {
             e.preventDefault();
 
