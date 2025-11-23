@@ -277,14 +277,17 @@
                     real-time tracking—so your money works harder while you stay in control.
                 </p>
                 <div class="">
-                    <a href="<?= site_url("dashboard") ?>" class="mil-btn mil-m mil-add-arrow">
-                        Start Earning
-                    </a>
+                    <div style="display:flex; justify-content:center;">
+                        <a href="<?= site_url("dashboard") ?>" class="mil-btn mil-m mil-add-arrow">
+                            Start Earning
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <div class="col-xl-5 mil-mb-80">
                 <div class="mil-image-frame mil-up">
-                    <img src="<?= base_url() ?>assets/images/111.png" alt="image" class="mil-scale-img" data-value-1="1"
+                    <img src="<?= base_url() ?>assets/images/rrr.png" alt="image" class="mil-scale-img" data-value-1="1"
                         data-value-2="1.2">
                 </div>
             </div>
@@ -292,6 +295,14 @@
     </div>
 </div>
 <style>
+    #dynamic-paragraph {
+    border: 1px solid #d4c8b0;          /* book-style soft border */
+    padding: 15px 20px;                 /* book paragraph spacing */
+    border-radius: 8px;                 /* smooth edges */
+    background: #faf7f2;                /* paper-style background */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* soft book shadow */
+}
+
     /* Add fade in/out effects */
     @keyframes fadeIn {
         0% {
@@ -320,27 +331,27 @@
     .fade-out {
         animation: fadeOut 1s forwards;
     }
+    
 </style>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Array of objects containing heading and paragraph text
-        var textArray = [
-            {
+        var textArray = [{
                 heading: "Your Money Deserves More — Earn Profit",
                 paragraph: "Invest smartly and watch your wealth grow every single day. Our platform delivers a clear, simple upto <strong>1% daily return</strong>, backed by secure systems, transparent terms, and real-time tracking—so your money works harder while you stay in control."
             },
             {
-                heading: "Share and receive upto 5% guaranteed rewards",
+                heading: "Share and receive upto 5% guaranteed Incomes",
                 paragraph: "Share your referral link and earn upto 5% on every new user you bring in. The more you refer, the more you earn—no limits, no hidden conditions"
-        },
+            },
             {
                 heading: "Achieve Financial Freedom Faster",
-                paragraph: "Join a community of smart investors who are already earning daily returns. With transparent processes and guaranteed returns, we make investing simple and rewarding."
+                paragraph: "Join a community of smart investors who are already earning daily returns. With transparent processes and guaranteed returns, we make investing simple."
             },
             {
                 heading: "Predictable Growth, Zero Market Stress",
-                paragraph: "We understand that not everyone has the time or expertise to navigate the ups and downs of financial markets. That’s why our system is built to deliver stable, predictable, and transparent rewards—without exposing you to the risks of daily price fluctuations."
+                paragraph: "We understand that not everyone has the time or expertise to navigate the ups and downs of financial markets. That’s why our system is built to deliver stable, predictable, and transparent Incomes—without exposing you to the risks of daily price fluctuations."
             }
             // Add more text objects as needed
         ];
@@ -351,11 +362,11 @@
             var currentText = textArray[index];
 
             // Add fade-out animation to the current text before changing it
-            $('#dynamic-heading').addClass('fade-out').on('animationend', function () {
+            $('#dynamic-heading').addClass('fade-out').on('animationend', function() {
                 $(this).removeClass('fade-out').html(currentText.heading).addClass('fade-in');
             });
 
-            $('#dynamic-paragraph').addClass('fade-out').on('animationend', function () {
+            $('#dynamic-paragraph').addClass('fade-out').on('animationend', function() {
                 $(this).removeClass('fade-out').html(currentText.paragraph).addClass('fade-in');
             });
 
@@ -364,12 +375,11 @@
         }
 
         // Set interval to change the text every 5 seconds
-        setInterval(updateContent, 5000);
+        setInterval(updateContent, 7000);
 
         // Initial load of the content
         updateContent();
     });
-
 </script>
 <!-- Grid Section -->
 <div id="grid-container" style="display: flex; flex-direction: column;height:auto;padding-bottom:20px;margin-top:0px">
@@ -401,7 +411,7 @@
         marqueeSkeleton += `</div></div>`;
 
         // Grid Skeleton
-        let gridSkeleton = `<div class="container mt-4"><h3 class="mb-3" style="font-weight:700;color:#003939;">Top Nifty 50 Stocks</h3><div class="row g-4">`;
+        let gridSkeleton = `<div class="container mt-4"><h3 class="mb-3" style="font-weight:700;color:#003939;">Top Bank Nifty,Sensex And Nifty 50 Stocks</h3><div class="row g-4">`;
         for (let i = 0; i < 12; i++) {
             gridSkeleton += `
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
@@ -456,7 +466,7 @@
         marqueeHTML += `</div></div>`;
 
         // Build Grid HTML
-        let gridHTML = `<div class="container mt-4"><h3 class="mb-3" style="font-weight:700;color:#003939;">Top Nifty 50 Stocks</h3><div class="row g-4">`;
+        let gridHTML = `<div class="container mt-4"><h3 class="mb-3" style="font-weight:700;color:#003939;">Our Top Investment Share Bank Nifty,Sensex Nifty 50 With Option Trading And Forex Trading Also</h3><div class="row g-4">`;
         data.forEach((s, i) => {
             let d = s.data || {};
             let price = d.last_price?.value || 0;

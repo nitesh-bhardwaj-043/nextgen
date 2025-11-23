@@ -125,7 +125,7 @@
                     <div class="row align-items-end">
                         <div class="mil-text-center">
                             <h2 class="mil-mb-30 mil-up">
-                                Grow Your Wealth Securely with <br> Next Gen Hybrid
+                                Grow Your Wealth Securely With <br>  Nextgen Smart And Secure Income  
                             </h2>
                             <p class="mil-text-m mil-soft mil-mb-60 mil-up">
                                 Deposit your funds and earn up to <strong>1% daily returns</strong> with our smart
@@ -252,7 +252,7 @@
                     <div class="row align-items-end">
                         <div class="mil-text-center">
                             <h2 class="mil-mb-30 mil-light mil-up">
-                                Earn Upto 5% Rewards — Profit Every Time You Refer
+                                Earn Upto 5% Income — Profit Every Time You Refer
                             </h2>
 
                             <p class="mil-text-m mil-dark-soft mil-mb-60 mil-up">
