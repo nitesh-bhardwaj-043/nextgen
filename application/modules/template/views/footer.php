@@ -38,13 +38,13 @@
                 <h6 class="mil-mb-60">Help</h6>
                 <ul class="mil-footer-list">
                     <li class="mil-text-m mil-soft mil-mb-15">
-                        999 Rue du Cherche-Midi, 7755500666 Paris, <br>France
+                        New Bypass , opposite NRL petrol pump Patna , 800027   <br>Bihar, India
                     </li>
                     <li class="mil-text-m mil-soft mil-mb-15">
-                        +001 (808) 555-0111
+                        +91 9065841889
                     </li>
                     <li class="mil-text-m mil-soft mil-mb-15">
-                        support@plax.network
+                        nextgensupport01@gmail.com
                     </li>
                 </ul>
             </div>
@@ -106,7 +106,7 @@
         <div class="mil-footer-bottom">
             <div class="row">
                 <div class="col-xl-6">
-                    <p class="mil-text-s mil-soft">© 2025 NextGen Hybrid Finance</p>
+                    <p class="mil-text-s mil-soft">© 2025 NextGen All Right Reserved</p>
                 </div>
 
             </div>
