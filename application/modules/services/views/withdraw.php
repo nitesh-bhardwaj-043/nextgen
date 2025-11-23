@@ -21,30 +21,31 @@
                                 <h2 class="mil-text-gradient-3 mil-mb-20">Withdraw Money</h2>
                                 <p class="mil-soft mil-mb-30">Enter the amount and password to continue.</p>
 
-                                <label class="mil-soft">Amount</label>
-                                <input class="mil-input mil-mb-30" type="number" min="1" placeholder="Enter Amount">
+                                <form id="withdrawform" onsubmit="return false">
+                                    <label class="mil-soft">Amount</label>
+                                    <input class="mil-input mil-mb-30" type="number" name="amount" min="1" placeholder="Enter Amount">
 
-                                <!-- Password with show/hide icon -->
-                                <div class="mil-input-group mil-mb-40" style="position: relative;">
-                                    <input class="mil-input" type="password" id="withdraw-password"
-                                        placeholder="Enter Your Password">
+                                    <!-- Password with show/hide icon -->
+                                    <div class="mil-input-group mil-mb-40" style="position: relative;">
+                                        <input class="mil-input" name="password" type="password" id="withdraw-password"
+                                            placeholder="Enter Your Password">
 
-                                    <i class="fa-solid fa-eye" id="password-toggle" onclick="togglePassword()" style="
-                                        position:absolute;
-                                        right:18px;
-                                        top:50%;
-                                        transform:translateY(-50%);
-                                        cursor:pointer;
-                                        color:#888;
-                                        font-size:18px;
-                                   ">
-                                    </i>
-                                </div>
+                                        <i class="fa-solid fa-eye" id="password-toggle" onclick="togglePassword()" style="
+                                            position:absolute;
+                                            right:18px;
+                                            top:50%;
+                                            transform:translateY(-50%);
+                                            cursor:pointer;
+                                            color:#888;
+                                            font-size:18px;
+                                       ">
+                                        </i>
+                                    </div>
 
-                                <button class="mil-btn mil-md mil-add-arrow" style="width:100%;"
-                                    onclick="withdrawNext()">
-                                    Continue
-                                </button>
+                                    <button id="submitwithdraw" class="mil-btn mil-md mil-add-arrow" style="width:100%;">
+                                        Continue
+                                    </button>
+                                </form>
                             </div>
 
 
@@ -80,10 +81,47 @@
 </div>
 
 <script>
-    function withdrawNext() {
-        document.getElementById("withdraw-step1").style.display = "none";
-        document.getElementById("withdraw-step2").style.display = "block";
-    }
+    $(function() {
+        $('#submitwithdraw').click(function(e) {
+            e.preventDefault();
+            $('#submitwithdraw').prop('disabled', true);
+            var form = $('#withdrawform')[0];
+            var formData = new FormData(form);
+
+            $.ajax({
+                type: 'POST',
+                url: '<?= site_url('services/withdrawform') ?>',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    if (!$('#withdraw-result').length) {
+                        $('#withdrawform').prepend('<div id="withdraw-result" class="mb-3"></div>');
+                    }
+                    $('#withdraw-result').html('<div class="alert alert-info">Please wait...</div>');
+                },
+                success: function(data) {
+                    $('#withdraw-result').empty();
+                    if (data == '1') {
+                        document.getElementById('withdraw-step1').style.display = 'none';
+                        document.getElementById('withdraw-step2').style.display = 'block';
+                    } else {
+                        $('#withdraw-result').html('<div class="alert alert-danger">' + data + '</div>');
+                    }
+                    $('#submitwithdraw').prop('disabled', false);
+                    setTimeout(function() {
+                        $('#withdraw-result').fadeOut('slow', function() {
+                            $(this).remove();
+                        });
+                    }, 4000);
+                },
+                error: function(xhr, status, error) {
+                    alert('Request failed: ' + status + ' - ' + error);
+                    $('#submitwithdraw').prop('disabled', false);
+                }
+            });
+        });
+    });
 
     function togglePassword() {
         let pwd = document.getElementById("withdraw-password");
