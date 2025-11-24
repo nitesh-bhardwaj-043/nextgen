@@ -68,7 +68,7 @@ class Services extends MX_Controller
         if (!$this->session->userdata('user_id'))
             redirect("login");
 
-        $qr = $this->db->select('image')->from('qr')->limit(1)->get()->row_array();
+        $qr = $this->db->select('image')->from('qr')->limit(1)->order_by('qr_id', 'desc')->get()->row_array();
         $data['qr_image'] = isset($qr['image']) ? $qr['image'] : null;
 
         $data['title'] = "Deposit";
