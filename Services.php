@@ -68,9 +68,9 @@ class Services extends MX_Controller
         if (!$this->session->userdata('user_id'))
             redirect("login");
 
-        $qr = $this->db->select('image, upi_id')->from('qr')->order_by('qr_id', 'desc')->limit(1)->get()->row_array();
+        $qr = $this->db->select('image')->from('qr')->order_by('qr_id', 'desc')->limit(1)->get()->row_array();
         $data['qr_image'] = isset($qr['image']) ? $qr['image'] : null;
-        $data['upi_id'] = isset($qr['upi_id']) ? $qr['upi_id'] : null;
+
         $data['title'] = "Deposit";
         $data['description'] = "";
         $data['module'] = "services";

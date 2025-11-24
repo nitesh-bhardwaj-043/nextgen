@@ -15,6 +15,11 @@
 				<p>Select any picture.</p>
 			</div>
 
+ 			<div class="col-sm-12 mb-2">
+ 				<label>UPI ID</label>
+ 				<input name="upi_id" class="form-control" ng-model="x.upi_id" autofocus>
+ 			</div>
+
  			<div class="clearfix"></div>
 
  			<div class="col-sm-12">

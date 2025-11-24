@@ -478,7 +478,7 @@
             let logo = s.logo || 'https://via.placeholder.com/42?text=NA';
 
             gridHTML += `
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
             <div class="stock-card-grid" id="grid-${i}">
                 <div class="d-flex align-items-center" style="gap:10px">
                     <img src="${logo}" class="stock-logo-grid">

@@ -30,6 +30,7 @@
 						<th>Sl No.</th>
 						<th>Name</th>
 						<th>Image</th>
+						<th>UPI ID</th>
 						<th style="width:85px">Action</th>
 					</tr>
 				</thead>
@@ -38,6 +39,7 @@
 						<td>{{$index+1}}</td>
 						<td>{{y.name}}</td>
 						<td><img src="<?= base_url('assets/uploads/qr/') ?>{{y.image}}" height="50px" /></td>
+						<td>{{y.upi_id}}</td>
 						<td>
 							<a href="javascript:void(0)" style="color:red" ng-click="delete_data(y.qr_id)">
 								<span class="fa fa-trash fa-2x"></span>

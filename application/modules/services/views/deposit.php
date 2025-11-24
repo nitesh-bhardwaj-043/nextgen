@@ -21,6 +21,13 @@
                                         style="width: 220px; border-radius: 20px; border: 3px solid #222;">
                                 </div>
 
+                                <div class="mil-mb-40">
+                                    <h5 class="mil-text-gradient-2 mil-mb-10">UPI ID:</h5>
+                                    <div class="mil-btn mil-light" style="padding: 12px 20px;">
+                                        <?= $upi_id ?>
+                                    </div>
+                                </div>
+
                                 <button class="mil-btn mil-sm" onclick="nextStep()">
                                     Next
                                 </button>

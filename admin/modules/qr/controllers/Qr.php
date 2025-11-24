@@ -21,9 +21,12 @@ class Qr extends MX_Controller
 
         // Validation rules
         $this->form_validation->set_rules("name", "Name", "required|trim");
+        $this->form_validation->set_rules("upi_id", "UPI ID", "required|trim|regex_match[/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9.-]+$/]");
+
 
         if ($this->form_validation->run() == TRUE) {
             $data['name'] = trim($_POST['name']);
+            $data['upi_id'] = trim($_POST['upi_id']);
 
             if (!empty($_FILES['image']['name'])) {
                 $data['image'] = $this->image_upload($_FILES['image']['name']);
